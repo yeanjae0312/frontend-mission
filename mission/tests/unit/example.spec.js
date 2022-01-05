@@ -1,12 +1,14 @@
 import { shallowMount } from '@vue/test-utils';
-import HelloWorld from '@/components/HelloWorld.vue';
+import TextRotate from '@/components/TextRotate.vue';
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message';
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg },
-    });
-    expect(wrapper.text()).toMatch(msg);
+describe('TextRotate.vue', () => {
+  test('input값을 입력하면 아래에 입력한 내용이 보인다.', async () => {
+    const wrapper = shallowMount(TextRotate);
+    const input = wrapper.find('input');
+    const showArea = wrapper.find('.show-input-text');
+
+    await input.setValue('input value');
+
+    expect(showArea.text()).toBe('input value');
   });
 });
