@@ -44,11 +44,26 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
   .box-form {
     display:flex;
     justify-content: center;
     align-items: center;
     gap:10px;
+  }
+
+  .box-form input {
+    padding:5px;
+    border-radius:5px;
+    border: solid 1px #000000;
+  }
+
+  button {
+    background:#41b883;
+    color:#fff;
+    padding:3px 5px 4px;
+    border: solid 1px #73cea5;
+    border-radius:5px;
+    font-weight:bold;
   }
 </style>
