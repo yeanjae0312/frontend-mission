@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modal class="hihi">
+    <Modal>
       <template v-slot:header>
         <h3>입력값과 클릭 수 확인</h3>
       </template>
@@ -8,7 +8,7 @@
         <div>{{ inputText }} : {{ countNum }}</div>
       </template>
       <template v-slot:footer>
-        <button class="modal-default-button" @click="$emit('close')">Close</button>
+        <button @click="$emit('close')">Close</button>
       </template>
     </Modal>
   </div>

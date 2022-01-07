@@ -1,14 +1,14 @@
 <template>
-  <div class="wrap-text-rotate">
+  <div>
     <div class="box-form">
       <!-- v-model속성 사용 -->
       <!-- <input type="text" v-model="inputText" placeholder="텍스트를 입력해보세요."> -->
       <!-- input 속성 사용 -->
       <input type="text" @input="typingInput" v-bind:value="inputText" placeholder="텍스트를 입력해보세요.">
-      <button class="btn-rotate" @click="rotateText">회전</button>
-      <button class="btn-count" @click="countClick">알림</button>
+      <button @click="rotateText">회전</button>
+      <button @click="countClick">알림</button>
     </div>
-    <p class="show-input-text">{{ inputText }}</p>
+    <p>{{ inputText }}</p>
 
     <TextRotateModal v-if="showModal" @close="showModal = false" id="modal" v-bind:propsdata="{inputText, countNum}"></TextRotateModal>
   </div>
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style scoped>
-  .wrap-text-rotate .box-form {
+  .box-form {
     display:flex;
     justify-content: center;
     align-items: center;
