@@ -8,7 +8,7 @@
       <button @click="rotateText">회전</button>
       <button @click="countClick" data-test="alert">알림</button>
     </div>
-    <p>{{ inputText }}</p>
+    <p data-test="custom-input">{{ inputText }}</p>
 
     <TextRotateModal v-if="showModal" @close="showModal = false" id="modal" v-bind:propsdata="{inputText, countNum}"></TextRotateModal>
   </div>
