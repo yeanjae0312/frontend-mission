@@ -8,7 +8,7 @@
         <div data-test="modal-body-message">{{ inputText }} : {{ countNum }}</div>
       </template>
       <template v-slot:footer>
-        <button @click="$emit('close')" data-test="modal-btn-close">Close</button>
+        <button @click="$emit('close')">Close</button>
       </template>
     </Modal>
   </div>
