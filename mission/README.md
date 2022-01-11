@@ -13,6 +13,9 @@
 - 깃 저장소 관리 역량: 프로젝트 생성 후 필요한 파일들만 골라 깃 저장소에 커밋/푸시했는가?
 - 생산성: 개발환경 설정을 하면서, 자신의 개발 효율을 향상 시키기 위한 설정들을 적용하였는가?
 - 유지보수성: 클린코드 가이드의 내용을 읽고 TDD 방법론을 적용하여 개발하였는가?
+***
+### 1주차 미션 관련 Pull Request 및 접근방법에 대한 내 생각
+https://github.com/yeanjae0312/frontend-mission/pull/1
 ### 1주차 과제 발표영상
 https://www.youtube.com/watch?v=ivGTxqWmfks
 
