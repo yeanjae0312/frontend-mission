@@ -6,7 +6,7 @@
       <!-- input 속성 사용 -->
       <input type="text" @input="typingInput" v-bind:value="inputText" placeholder="텍스트를 입력해보세요.">
       <button @click="rotateText">회전</button>
-      <button @click="countClick">알림</button>
+      <button @click="countClick" data-test="alert">알림</button>
     </div>
     <p>{{ inputText }}</p>
 

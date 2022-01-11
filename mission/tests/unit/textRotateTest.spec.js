@@ -25,29 +25,23 @@ describe('TextRotate.vue', () => {
     expect(wrapper.text()).toContain('34512');
   });
 
-  /* test('클릭수 버튼 클릭시 input에 입력된 문자열을 모달로 보여준다.', async () => {
+  test('클릭수 버튼 클릭시 input에 입력된 문자열을 모달로 보여준다.', async () => {
     const wrapper = mount(TextRotate);
     const input = wrapper.find('input');
-    const btn = wrapper.find('button');
-    const modal = wrapper.find('#modal');
-    
+    const btn = wrapper.get('[data-test="alert"]');
+
     await input.setValue('Projectlion');
     await btn.trigger('click');
 
-    expect(modal.text()).toContain('Projectlion');
-  }); */
+    expect(wrapper.get('[data-test="modal-body-message"]').text()).toContain('Projectlion');
+  });
 
-  /* test('클릭수 버튼 클릭시 클릭 수를 모달로 보여준다.', async () => {
+  test('클릭수 버튼 클릭시 클릭 수를 모달로 보여준다.', async () => {
     const wrapper = mount(TextRotate);
-    const btn = wrapper.find('button');
-    const modal = wrapper.find('#modal');
+    const btn = wrapper.get('[data-test="alert"]');
 
     await btn.trigger('click');
-    await btn.trigger('click');
-    await btn.trigger('click');
-    await btn.trigger('click');
-    await btn.trigger('click');
 
-    expect(modal.text()).toContain('5');
-  }); */
+    expect(wrapper.get('[data-test="modal-body-message"]').text()).toContain('1');
+  });
 });
