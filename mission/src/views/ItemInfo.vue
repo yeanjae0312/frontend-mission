@@ -3,6 +3,21 @@
     <div data-test="product-img" class="product-img">
       <img :src="this.product.img" alt="">
     </div>
+    <div class="wrapper">
+      <div class="company-wrap">
+        <div data-test="company-profile" class="img">
+          <img :src="this.company.profile" alt="">
+        </div>
+        <div data-test="company-info" class="info">
+          <p data-test="company-info-name" class="info-name">{{ this.company.name }}</p>
+          <p class="info-tag"><span data-test="company-info-tag" v-for="item in this.company.tag" v-bind:key="item">#{{ item }}</span></p>
+        </div>
+        <div data-test="company-star" class="star">
+          <i v-if="this.company.star" @click="toggleClickedStar()" class="fas fa-star"></i>
+          <i v-else @click="toggleClickedStar()" class="far fa-star"></i>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,8 +30,8 @@ export default {
         name: '멋쟁이사자처럼',
         /* eslint-disable global-require */
         profile: require('../assets/img/company-img.jpg'),
-        tag: ['시크', '심플베이직', '페미닌', '러블리', '섹시글램', '유니크', '캐쥬얼'],
-        book: false,
+        tag: ['시크', '심플베이직', '페미닌', '러블리'],
+        star: false,
       },
       product: {
         name: '[누빔안감] 핸드메이드 울 롱코트',
@@ -45,7 +60,9 @@ export default {
     };
   },
   methods: {
-
+    toggleClickedStar() {
+      this.company.star = !this.company.star;
+    },
   },
   computed: {
 
@@ -81,5 +98,67 @@ export default {
     width:auto;
     height:auto;
     transform:translate(-50%,-50%);
+  }
+
+  .wrapper {
+    padding: 0 14px;
+    box-sizing: border-box;
+  }
+
+  .company-wrap {
+    --imgSize: 40px;
+    --iconSize: 18px;
+    --gap: 10px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+
+    margin-top:10px;
+  }
+
+  .company-wrap .img {
+    width:var(--imgSize);
+    height:var(--imgSize);
+
+    border-radius:50%;
+    overflow:hidden;
+  }
+
+  .company-wrap .img img {
+    width:100%;
+    height:100%;
+  }
+
+  .company-wrap .info {
+    width:calc(100% - var(--imgSize) - var(--iconSize) - var(--gap)*2);
+  }
+
+  .company-wrap .info p {
+    margin: 0;
+  }
+
+  .company-wrap .info .info-name {
+    font-size:14px;
+    font-weight:bold;
+  }
+
+  .company-wrap .info .info-tag {
+    margin-top:4px;
+    font-size:12px;
+    color:rgb(97, 97, 97);
+  }
+
+  .company-wrap .info .info-tag span:not(:last-child) {
+    margin-right:4px;
+  }
+
+  .company-wrap .star {
+    width:var(--iconSize);
+    cursor:pointer;
+  }
+
+  .company-wrap .star i {
+    color:rgb(192, 59, 59);
   }
 </style>
