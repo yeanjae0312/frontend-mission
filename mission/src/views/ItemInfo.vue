@@ -1,5 +1,9 @@
 <template>
-<div id='item-info-page'></div>
+  <div id='item-info-page'>
+    <div data-test="product-img" class="product-img">
+      <img :src="this.product.img" alt="">
+    </div>
+  </div>
 </template>
 
 <script>
@@ -50,5 +54,32 @@ export default {
 </script>
 
 <style scoped>
+  #item-info-page {
+    --max-size: 400px;
+    width:100%;
+    max-width:var(--max-size);
+    margin:0 auto;
+  }
 
+  .product-img {
+    position:relative;
+    width:100%;
+    height:100vw;
+    max-width:var(--max-size);
+    max-height:var(--max-size);
+    min-height:300px;
+
+    overflow:hidden;
+  }
+
+  .product-img img {
+    position:absolute;
+    top:50%;
+    left:50%;
+    min-width:100%;
+    min-height:100%;
+    width:auto;
+    height:auto;
+    transform:translate(-50%,-50%);
+  }
 </style>
