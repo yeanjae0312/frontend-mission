@@ -17,6 +17,18 @@
         <i v-else @click="toggleClickedStar()" class="far fa-star"></i>
       </div>
     </div>
+
+    <div class="product-wrap">
+      <div data-test="product-info" class="product-info">
+        <p class="info-name">{{ this.product.name }}</p>
+        <div class="info-price">
+          <p class="info-price-rate" v-if="this.product.discount">{{ this.product.discountRate }}%</p>
+          <p data-test="discount-num" class="info-price-discount" v-if="this.product.discount">{{ showDiscountPrice }}원</p>
+          <p class="info-price-original" v-bind:class="{line: this.product.discount}">{{ this.product.price }}원</p>
+        </div>
+      </div>
+      <div class="detail"></div>
+    </div>
   </div>
 </template>
 
@@ -36,6 +48,7 @@ export default {
         name: '[누빔안감] 핸드메이드 울 롱코트',
         /* eslint-disable global-require */
         img: require('../assets/img/product-img.jpg'),
+        discount: true,
         discountRate: '39',
         price: 98000,
         detail: '<img src="/img/product-detail01.jpg"><span style="color: red">This should be red.</span>',
@@ -64,7 +77,11 @@ export default {
     },
   },
   computed: {
+    showDiscountPrice() {
+      const num = this.product.price * (1 - this.product.discountRate * 0.01); // 할인가
 
+      return Math.ceil((num / 100)) * 100; // 100원 단위에서 올림처리
+    },
   },
 };
 </script>
@@ -76,6 +93,10 @@ export default {
     width:100%;
     max-width:var(--max-size);
     margin:0 auto;
+  }
+
+  p {
+    margin: 0;
   }
 
   .product-img {
@@ -130,10 +151,6 @@ export default {
     width:calc(100% - var(--imgSize) - var(--iconSize) - var(--gap)*2);
   }
 
-  .company-wrap .info p {
-    margin: 0;
-  }
-
   .company-wrap .info .info-name {
     font-size:14px;
     font-weight:bold;
@@ -156,5 +173,45 @@ export default {
 
   .company-wrap .star i {
     color:rgb(192, 59, 59);
+  }
+
+  .product-wrap {
+    padding: 16px var(--paddingSide);
+  }
+
+  .product-info .info-name {
+    font-size:18px;
+    font-weight:bold;
+  }
+
+  .product-info .info-price {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:10px;
+
+    margin-top:8px;
+  }
+
+  .product-info .info-price-rate {
+    color:rgb(226, 19, 19);
+    font-weight:bold;
+  }
+
+  .product-info .info-price-discount {
+    color:rgb(59, 59, 59);
+    font-weight:600;
+  }
+
+  .product-info .info-price-original {
+    color:rgb(59, 59, 59);
+    font-weight:600;
+  }
+
+  .product-info .info-price-original.line {
+    color:rgb(122, 122, 122);
+    font-size:12px;
+    font-weight:normal;
+    text-decoration: line-through;
   }
 </style>
