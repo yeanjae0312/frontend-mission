@@ -8,25 +8,25 @@ describe('ItemInfoPage', () => {
     expect(wrapper.find('#item-info-page').exists()).toBe(true);
   });
 
-  it('상품 이미지 영역이 있는가', async () => {
+  it('상품 이미지 영역이 있는가', () => {
     const wrapper = mount(ItemInfoPage);
 
     expect(wrapper.get('[data-test="product-img"]').exists()).toBe(true);
   });
 
-  it('판매자 정보에 프로필 영역이 있는가', async () => {
+  it('판매자 정보에 프로필 영역이 있는가', () => {
     const wrapper = mount(ItemInfoPage);
 
     expect(wrapper.get('[data-test="company-profile"]').exists()).toBe(true);
   });
 
-  it('판매자 정보에 상호명과 태그 영역이 있는가', async () => {
+  it('판매자 정보에 상호명과 태그 영역이 있는가', () => {
     const wrapper = mount(ItemInfoPage);
 
     expect(wrapper.get('[data-test="company-info"]').exists()).toBe(true);
   });
 
-  it('판매자 정보에 즐겨찾기 영역이 있는가', async () => {
+  it('판매자 정보에 즐겨찾기 영역이 있는가', () => {
     const wrapper = mount(ItemInfoPage);
 
     expect(wrapper.get('[data-test="company-star"]').exists()).toBe(true);
