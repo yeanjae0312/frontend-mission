@@ -79,4 +79,23 @@ describe('ItemInfoPage', () => {
 
     expect(wrapper.get('[data-test="company-star"]').find('i.far').isVisible()).toBe(true);
   });
+
+  it('상품의 기본정보 영역이 있는가', () => {
+    const wrapper = mount(ItemInfoPage);
+
+    expect(wrapper.get('[data-test="product-info"]').exists()).toBe(true);
+  });
+
+  it('할인율와 정가를 입력하면 할인가가 계산되어 나오는가', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      product: {
+        discountRate: '50',
+        price: 100000,
+      },
+    });
+
+    expect(wrapper.get('[data-test="discount-num"]').text()).toContain('50000');
+  });
 });
