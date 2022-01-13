@@ -3,19 +3,18 @@
     <div data-test="product-img" class="product-img">
       <img :src="this.product.img" alt="">
     </div>
-    <div class="wrapper">
-      <div class="company-wrap">
-        <div data-test="company-profile" class="img">
-          <img :src="this.company.profile" alt="">
-        </div>
-        <div data-test="company-info" class="info">
-          <p data-test="company-info-name" class="info-name">{{ this.company.name }}</p>
-          <p class="info-tag"><span data-test="company-info-tag" v-for="item in this.company.tag" v-bind:key="item">#{{ item }}</span></p>
-        </div>
-        <div data-test="company-star" class="star">
-          <i v-if="this.company.star" @click="toggleClickedStar()" class="fas fa-star"></i>
-          <i v-else @click="toggleClickedStar()" class="far fa-star"></i>
-        </div>
+
+    <div class="company-wrap">
+      <div data-test="company-profile" class="img">
+        <img :src="this.company.profile" alt="">
+      </div>
+      <div data-test="company-info" class="info">
+        <p data-test="company-info-name" class="info-name">{{ this.company.name }}</p>
+        <p class="info-tag"><span data-test="company-info-tag" v-for="item in this.company.tag" v-bind:key="item">#{{ item }}</span></p>
+      </div>
+      <div data-test="company-star" class="star">
+        <i v-if="this.company.star" @click="toggleClickedStar()" class="fas fa-star"></i>
+        <i v-else @click="toggleClickedStar()" class="far fa-star"></i>
       </div>
     </div>
   </div>
@@ -73,6 +72,7 @@ export default {
 <style scoped>
   #item-info-page {
     --max-size: 400px;
+    --paddingSide: 14px;
     width:100%;
     max-width:var(--max-size);
     margin:0 auto;
@@ -100,11 +100,6 @@ export default {
     transform:translate(-50%,-50%);
   }
 
-  .wrapper {
-    padding: 0 14px;
-    box-sizing: border-box;
-  }
-
   .company-wrap {
     --imgSize: 40px;
     --iconSize: 18px;
@@ -114,7 +109,8 @@ export default {
     align-items: center;
     gap: var(--gap);
 
-    margin-top:10px;
+    padding: 10px var(--paddingSide);
+    border-bottom: solid 1px #ccc;
   }
 
   .company-wrap .img {
