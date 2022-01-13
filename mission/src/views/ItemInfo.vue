@@ -27,7 +27,10 @@
           <p class="info-price-original" v-bind:class="{line: this.product.discount}">{{ this.product.price }}원</p>
         </div>
       </div>
-      <div class="detail"></div>
+      <div data-test="product-detail" class="product-detail">
+        <p class="detail-title">상품 상세 설명</p>
+        <div v-html="this.product.detail"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +54,7 @@ export default {
         discount: true,
         discountRate: '39',
         price: 98000,
-        detail: '<img src="/img/product-detail01.jpg"><span style="color: red">This should be red.</span>',
+        detail: '<div style="width:100%; padding:10px 14px; box-sizing: border-box;"><img src="/img/product-detail01.jpg" style="width:100%;"><span style="font-size:14px; font-weight:600;">누빔이 있어 따뜻하고 그렇다고 무겁지 않은 코트입니다!</span></div>',
       },
       reviewer: [
         {
@@ -176,7 +179,11 @@ export default {
   }
 
   .product-wrap {
-    padding: 16px var(--paddingSide);
+    padding: 16px 0;
+  }
+
+  .product-wrap .product-info {
+    padding: 0 var(--paddingSide);
   }
 
   .product-info .info-name {
@@ -213,5 +220,16 @@ export default {
     font-size:12px;
     font-weight:normal;
     text-decoration: line-through;
+  }
+
+  .product-wrap .product-detail {
+    margin-top:20px;
+    border-bottom:solid 1px #ccc;
+  }
+
+  .product-detail .detail-title {
+    padding:10px var(--paddingSide);
+    border-bottom: solid 1px rgb(231, 231, 231);
+    font-weight:600;
   }
 </style>
