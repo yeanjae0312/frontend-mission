@@ -98,4 +98,10 @@ describe('ItemInfoPage', () => {
 
     expect(wrapper.get('[data-test="discount-num"]').text()).toContain('50000');
   });
+
+  it('상품 상세 설명 영역이 있는가', () => {
+    const wrapper = mount(ItemInfoPage);
+
+    expect(wrapper.get('[data-test="product-detail"]').exists()).toBe(true);
+  });
 });
