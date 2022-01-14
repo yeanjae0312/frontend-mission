@@ -104,4 +104,66 @@ describe('ItemInfoPage', () => {
 
     expect(wrapper.get('[data-test="product-detail"]').exists()).toBe(true);
   });
+
+  it('리뷰 영역이 있는가', () => {
+    const wrapper = mount(ItemInfoPage);
+
+    expect(wrapper.get('[data-test="review"]').exists()).toBe(true);
+  });
+
+  it('리뷰어 이름이 잘 가져와 지는가', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      reviewer: [
+        {
+          name: 'hello',
+        },
+      ],
+    });
+
+    expect(wrapper.get('[data-test="reviewer-name"]').text()).toContain('hello');
+  });
+
+  it('리뷰 날짜가 잘 가져와 지는가', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      reviewer: [
+        {
+          date: '2021. 04. 29',
+        },
+      ],
+    });
+
+    expect(wrapper.get('[data-test="reviewer-date"]').text()).toContain('2021. 04. 29');
+  });
+
+  it('리뷰 제목이 잘 가져와 지는가', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      reviewer: [
+        {
+          title: '리뷰 타이틀',
+        },
+      ],
+    });
+
+    expect(wrapper.get('[data-test="reviewer-title"]').text()).toContain('리뷰 타이틀');
+  });
+
+  it('리뷰 본문이 잘 가져와 지는가', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      reviewer: [
+        {
+          contentString: '리뷰 본문',
+        },
+      ],
+    });
+
+    expect(wrapper.get('[data-test="reviewer-cont"]').text()).toContain('리뷰 본문');
+  });
 });
