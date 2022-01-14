@@ -55,6 +55,10 @@
     </div>
 
     <div class="btn-wrap">
+      <div>
+        <i data-test="heart" v-if="this.product.heart" class="fas fa-heart" @click="toggleClickedHeart()"></i>
+        <i data-test="heart" v-else class="far fa-heart" @click="toggleClickedHeart()"></i>
+      </div>
       <button data-test="btn-purchase" type="button"><span v-if="this.product.discount">{{ showDiscountPrice }}</span><span v-else>{{ this.product.price }}</span>원 구매</button>
     </div>
   </div>
@@ -76,6 +80,7 @@ export default {
         name: '[누빔안감] 핸드메이드 울 롱코트',
         /* eslint-disable global-require */
         img: require('../assets/img/product-img.jpg'),
+        heart: false,
         discount: true,
         discountRate: '39',
         price: 98000,
@@ -104,6 +109,14 @@ export default {
   methods: {
     toggleClickedStar() {
       this.company.star = !this.company.star;
+    },
+    toggleClickedHeart() {
+      this.product.heart = !this.product.heart;
+
+      if (this.product.heart === true) {
+        // eslint-disable-next-line no-alert
+        alert('찜에 등록되었습니다.');
+      }
     },
   },
   computed: {
@@ -357,6 +370,11 @@ export default {
     z-index:100;
     transform:translateX(-50%);
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:50px;
+
     width:100%;
     max-width:var(--max-size);
     height:50px;
@@ -366,7 +384,11 @@ export default {
 
     background:white;
     border-top:solid 1px #ccc;
-    text-align:center;
+  }
+
+  .btn-wrap i {
+    font-size:22px;
+    color:rgb(31, 31, 31);
   }
 
   .btn-wrap button {
