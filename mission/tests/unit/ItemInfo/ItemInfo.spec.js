@@ -166,4 +166,23 @@ describe('ItemInfoPage', () => {
 
     expect(wrapper.get('[data-test="reviewer-cont"]').text()).toContain('리뷰 본문');
   });
+
+  it('구매 버튼 영역이 있는가', () => {
+    const wrapper = mount(ItemInfoPage);
+
+    expect(wrapper.get('[data-test="btn-purchase"]').exists()).toBe(true);
+  });
+
+  it('구매 버튼 안에 가격의 데이터가 잘 가져와 지는가', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      product: {
+        discountRate: '50',
+        price: 100000,
+      },
+    });
+
+    expect(wrapper.get('[data-test="btn-purchase"]').text()).toContain('50000');
+  });
 });
