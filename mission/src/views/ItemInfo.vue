@@ -53,6 +53,10 @@
         </div>
       </div>
     </div>
+
+    <div class="btn-wrap">
+      <button data-test="btn-purchase" type="button"><span v-if="this.product.discount">{{ showDiscountPrice }}</span><span v-else>{{ this.product.price }}</span>원 구매</button>
+    </div>
   </div>
 </template>
 
@@ -119,6 +123,7 @@ export default {
     width:100%;
     max-width:var(--max-size);
     margin:0 auto;
+    padding-bottom:70px;
   }
 
   p {
@@ -343,5 +348,33 @@ export default {
     width:auto;
     height:auto;
     transform:translate(-50%,-50%);
+  }
+
+  .btn-wrap {
+    position:fixed;
+    bottom:0;
+    left:50%;
+    z-index:100;
+    transform:translateX(-50%);
+
+    width:100%;
+    max-width:var(--max-size);
+    height:50px;
+    padding:8px var(--paddingSide);
+    box-sizing: border-box;
+    box-shadow: 0 -1px 8px -2px rgb(163, 163, 163);
+
+    background:white;
+    border-top:solid 1px #ccc;
+    text-align:center;
+  }
+
+  .btn-wrap button {
+    padding:4px 14px;
+    border-radius: 4px;
+    background:rgb(150, 3, 3);
+    border:none;
+    color:white;
+    font-size:18px;
   }
 </style>
