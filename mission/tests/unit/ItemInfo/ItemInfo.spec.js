@@ -185,4 +185,16 @@ describe('ItemInfoPage', () => {
 
     expect(wrapper.get('[data-test="btn-purchase"]').text()).toContain('50000');
   });
+
+  it('찜하기 버튼을 클릭하면 등록이 되는가', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      product: {
+        heart: true,
+      },
+    });
+
+    expect(wrapper.get('[data-test="heart"]').find('i.fas').isVisible()).toBe(true);
+  });
 });
