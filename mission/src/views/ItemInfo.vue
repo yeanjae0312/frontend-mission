@@ -32,6 +32,27 @@
         <div v-html="this.product.detail"></div>
       </div>
     </div>
+
+    <div class="review-wrap">
+      <p class="review-title">Review</p>
+      <div data-test="review" class="review-list" v-for="(list, index) in this.reviewer" v-bind:key="list">
+        <div class="review-list-inner">
+          <div class="info-box">
+            <div class="info-box-top">
+              <p data-test="reviewer-name" class="name">{{ this.reviewer[index].name }}</p>
+              <p data-test="reviewer-date" class="date">{{ this.reviewer[index].date }}</p>
+            </div>
+            <p data-test="reviewer-title" class="info-box-title">{{ this.reviewer[index].title }}</p>
+            <p data-test="reviewer-cont" class="info-box-cont">{{ this.reviewer[index].contentString }}</p>
+          </div>
+          <div class="img-box">
+            <p class="img">
+              <img :src="this.reviewer[index].contentImg" alt="">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,6 +80,7 @@ export default {
       reviewer: [
         {
           name: 'lion',
+          date: '2021. 01. 14',
           title: '만족해요',
           contentString: '핏이 이쁘고 따뜻해서 만족해요. 요즘 교복처럼 입고다니는 옷이네요~',
           /* eslint-disable global-require */
@@ -66,6 +88,7 @@ export default {
         },
         {
           name: 'cuty lion',
+          date: '2021. 01. 10',
           title: '별로에요',
           contentString: '생각보다 두껍고 무게가 나가네요. 보풀도 잘 일어날 것 같은 재질이에요.',
           /* eslint-disable global-require */
@@ -231,5 +254,94 @@ export default {
     padding:10px var(--paddingSide);
     border-bottom: solid 1px rgb(231, 231, 231);
     font-weight:600;
+  }
+
+  .review-wrap {
+    margin-top:16px;
+    padding-bottom:10px;
+    background:rgb(233, 233, 233);
+  }
+
+  .review-wrap .review-title {
+    padding: 0 var(--paddingSide) 8px;
+    background:white;
+    font-weight:600;
+  }
+
+  .review-wrap .review-list {
+    margin:8px 0;
+  }
+
+  .review-wrap .review-list:last-child {
+    margin-bottom:0;
+  }
+
+  .review-list .review-list-inner {
+    --imgSize: 100px;
+    --gap:10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+
+    padding:8px var(--paddingSide);
+    box-sizing: border-box;
+    background:white;
+  }
+
+  .review-list-inner .info-box {
+    width: calc(100% - var(--imgSize) - var(--gap));
+  }
+
+  .review-list-inner .info-box .info-box-top {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:10px;
+  }
+
+  .review-list-inner .info-box .info-box-top .name {
+    font-size:14px;
+  }
+
+  .review-list-inner .info-box .info-box-top .date {
+    font-size:11px;
+    color:rgb(134, 134, 134);
+  }
+
+  .review-list-inner .info-box .info-box-title {
+    margin-top:4px;
+    font-size:14px;
+    font-weight:bold;
+  }
+
+  .review-list-inner .info-box .info-box-cont {
+    margin-top:4px;
+    font-size:12px;
+  }
+
+  .review-list-inner .img-box {
+    width: var(--imgSize);
+    height: 27.77vw;
+    min-height: 100px;
+    max-height:100px;
+  }
+
+  .review-list-inner .img-box .img {
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+  }
+
+  .review-list-inner .img-box img {
+    position:absolute;
+    top:50%;
+    left:50%;
+    min-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    transform:translate(-50%,-50%);
   }
 </style>
