@@ -9,6 +9,10 @@
 </template>
 
 <style>
+html, body {
+  margin: 0;
+}
+
 #app {
   min-width:300px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
