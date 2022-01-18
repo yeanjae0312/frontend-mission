@@ -13,8 +13,8 @@
         <p class="info-tag"><span data-test="company-info-tag" v-for="item in this.company.tag" v-bind:key="item">#{{ item }}</span></p>
       </div>
       <div data-test="company-star" class="star">
-        <i v-if="this.company.star" @click="toggleClickedStar()" class="fas fa-star"></i>
-        <i v-else @click="toggleClickedStar()" class="far fa-star"></i>
+        <font-awesome-icon data-test="company-star-fill" v-if="this.company.star" @click="toggleClickedStar()" :icon="['fas','star']" class="icon-star" />
+        <font-awesome-icon data-test="company-star-solid" v-else @click="toggleClickedStar()" :icon="['far','star']" class="icon-star" />
       </div>
     </div>
 
@@ -56,8 +56,8 @@
 
     <div class="btn-wrap">
       <div>
-        <i data-test="heart" v-if="this.product.heart" class="fas fa-heart" @click="toggleClickedHeart()"></i>
-        <i data-test="heart" v-else class="far fa-heart" @click="toggleClickedHeart()"></i>
+        <font-awesome-icon data-test="heart-fill" v-if="this.product.heart" @click="toggleClickedHeart()" :icon="['fas','heart']" class="icon-heart" />
+        <font-awesome-icon data-test="heart-solid" v-else @click="toggleClickedHeart()" :icon="['far','heart']" class="icon-heart" />
       </div>
       <button data-test="btn-purchase" type="button"><span v-if="this.product.discount">{{ showDiscountPrice }}</span><span v-else>{{ this.product.price }}</span>원 구매</button>
     </div>
@@ -210,12 +210,9 @@ export default {
     margin-right:4px;
   }
 
-  .company-wrap .star {
+  .company-wrap .icon-star {
     width:var(--iconSize);
     cursor:pointer;
-  }
-
-  .company-wrap .star i {
     color:rgb(192, 59, 59);
   }
 
@@ -386,7 +383,7 @@ export default {
     border-top:solid 1px #ccc;
   }
 
-  .btn-wrap i {
+  .btn-wrap .icon-heart {
     font-size:22px;
     color:rgb(31, 31, 31);
   }
