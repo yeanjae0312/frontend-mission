@@ -1,65 +1,73 @@
 <template>
   <div id='item-info-page'>
     <div data-test="product-img" class="product-img">
-      <img :src="this.product.img" alt="">
+      <img :src="product.img" alt="">
     </div>
 
     <div class="company-wrap">
       <div data-test="company-profile" class="img">
-        <img :src="this.company.profile" alt="">
+        <img :src="company.profile" alt="">
       </div>
+
       <div data-test="company-info" class="info">
-        <p data-test="company-info-name" class="info-name">{{ this.company.name }}</p>
-        <p class="info-tag"><span data-test="company-info-tag" v-for="item in this.company.tag" v-bind:key="item">#{{ item }}</span></p>
+        <p data-test="company-info-name" class="info-name">{{ company.name }}</p>
+        <p class="info-tag"><span data-test="company-info-tag" v-for="item in company.tag" :key="item">#{{ item }}</span></p>
       </div>
+
       <div data-test="company-star" class="star">
-        <font-awesome-icon data-test="company-star-fill" v-if="this.company.star" @click="toggleClickedStar()" :icon="['fas','star']" class="icon-star" />
+        <font-awesome-icon data-test="company-star-fill" v-if="company.star" @click="toggleClickedStar()" :icon="['fas','star']" class="icon-star" />
         <font-awesome-icon data-test="company-star-solid" v-else @click="toggleClickedStar()" :icon="['far','star']" class="icon-star" />
       </div>
     </div>
 
     <div class="product-wrap">
       <div data-test="product-info" class="product-info">
-        <p class="info-name">{{ this.product.name }}</p>
+        <p class="info-name">{{ product.name }}</p>
         <div class="info-price">
-          <p class="info-price-rate" v-if="this.product.discount">{{ this.product.discountRate }}%</p>
-          <p data-test="discount-num" class="info-price-discount" v-if="this.product.discount">{{ showDiscountPrice }}원</p>
-          <p class="info-price-original" v-bind:class="{line: this.product.discount}">{{ this.product.price }}원</p>
+          <p class="info-price-rate" v-if="product.isDiscount">{{ product.discountRate }}%</p>
+          <p data-test="discount-num" class="info-price-discount" v-if="product.isDiscount">{{ showDiscountPrice }}원</p>
+          <p class="info-price-original" :class="{line: product.isDiscount}">{{ product.price }}원</p>
         </div>
       </div>
+
       <div data-test="product-detail" class="product-detail">
         <p class="detail-title">상품 상세 설명</p>
-        <div v-html="this.product.detail"></div>
+        <div v-html="product.detail"></div>
       </div>
     </div>
 
     <div class="review-wrap">
       <p class="review-title">Review</p>
-      <div data-test="review" class="review-list" v-for="(list, index) in this.reviewer" v-bind:key="list">
+
+      <div data-test="review" class="review-list" v-for="list in reviewer" :key="list">
         <div class="review-list-inner">
+
           <div class="info-box">
             <div class="info-box-top">
-              <p data-test="reviewer-name" class="name">{{ this.reviewer[index].name }}</p>
-              <p data-test="reviewer-date" class="date">{{ this.reviewer[index].date }}</p>
+              <p data-test="reviewer-name" class="name">{{ list.name }}</p>
+              <p data-test="reviewer-date" class="date">{{ list.date }}</p>
             </div>
-            <p data-test="reviewer-title" class="info-box-title">{{ this.reviewer[index].title }}</p>
-            <p data-test="reviewer-cont" class="info-box-cont">{{ this.reviewer[index].contentString }}</p>
+            <p data-test="reviewer-title" class="info-box-title">{{ list.title }}</p>
+            <p data-test="reviewer-cont" class="info-box-cont">{{ list.contentString }}</p>
           </div>
+
           <div class="img-box">
             <p class="img">
-              <img :src="this.reviewer[index].contentImg" alt="">
+              <img :src="list.contentImg" alt="">
             </p>
           </div>
+
         </div>
       </div>
     </div>
 
     <div class="btn-wrap">
       <div>
-        <font-awesome-icon data-test="heart-fill" v-if="this.product.heart" @click="toggleClickedHeart()" :icon="['fas','heart']" class="icon-heart" />
+        <font-awesome-icon data-test="heart-fill" v-if="product.heart" @click="toggleClickedHeart()" :icon="['fas','heart']" class="icon-heart" />
         <font-awesome-icon data-test="heart-solid" v-else @click="toggleClickedHeart()" :icon="['far','heart']" class="icon-heart" />
       </div>
-      <button data-test="btn-purchase" type="button"><span v-if="this.product.discount">{{ showDiscountPrice }}</span><span v-else>{{ this.product.price }}</span>원 구매</button>
+
+      <button data-test="btn-purchase" type="button"><span v-if="product.isDiscount">{{ showDiscountPrice }}</span><span v-else>{{ product.price }}</span>원 구매</button>
     </div>
   </div>
 </template>
@@ -81,7 +89,7 @@ export default {
         /* eslint-disable global-require */
         img: require('../assets/img/product-img.jpg'),
         heart: false,
-        discount: true,
+        isDiscount: true,
         discountRate: '39',
         price: 98000,
         detail: '<div style="width:100%; padding:10px 14px; box-sizing: border-box;"><img src="/img/product-detail01.jpg" style="width:100%;"><span style="font-size:14px; font-weight:600;">누빔이 있어 따뜻하고 그렇다고 무겁지 않은 코트입니다!</span></div>',
