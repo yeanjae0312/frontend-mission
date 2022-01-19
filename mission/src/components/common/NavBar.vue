@@ -1,12 +1,13 @@
 <template>
-  <div class="item-list-item">item</div>
+  <div class="nav">nav</div>
 </template>
 
 <script>
 export default {
-  name: 'ItemListItem',
+
 };
 </script>
 
 <style>
+
 </style>
