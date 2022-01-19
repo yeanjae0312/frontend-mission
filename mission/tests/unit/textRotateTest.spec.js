@@ -2,25 +2,25 @@ import { shallowMount, mount } from '@vue/test-utils';
 import TextRotate from '@/components/TextRotate.vue';
 
 describe('TextRotate.vue', () => {
-  test('텍스트를 받는 input이 있는가', async() => {
+  test('텍스트를 받는 input이 있는가', async () => {
     const wrapper = shallowMount(TextRotate);
 
     expect(wrapper.find('input').exists()).toBe(true);
   });
 
-  test('알림 버튼이 있는가', async() => {
+  test('알림 버튼이 있는가', async () => {
     const wrapper = shallowMount(TextRotate);
 
     expect(wrapper.find('button').exists()).toBe(true);
   });
 
-  test('입력된 텍스트를 보여주는 영역이 있는가', async() => {
+  test('입력된 텍스트를 보여주는 영역이 있는가', async () => {
     const wrapper = shallowMount(TextRotate);
 
     expect(wrapper.find('[data-test="custom-input"]').exists()).toBe(true);
   });
 
-  test('input에 입력된 텍스트가 커스텀 인풋 영역에 동일하게 보여진다.', async() => {
+  test('input에 입력된 텍스트가 커스텀 인풋 영역에 동일하게 보여진다.', async () => {
     const wrapper = shallowMount(TextRotate);
     const input = wrapper.find('input');
     await input.setValue('Projectlion');
