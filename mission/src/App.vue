@@ -6,7 +6,20 @@
 
 <style>
 html, body {
+  margin: 0 auto;
+  --max-size: 400px;
+  --paddingSide: 14px;
+  width:100%;
+  max-width:var(--max-size);
+}
+
+p {
   margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 #app {
