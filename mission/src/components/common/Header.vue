@@ -43,20 +43,21 @@ export default {
   .header {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
 
     width:100%;
+    max-width: var(--max-size);
     border-bottom: solid 1px rgb(192, 192, 192);
     box-sizing: border-box;
     box-shadow: 0px 4px 4px -4px rgb(141, 141, 141);
 
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-50%, 0, 0);
     transition: 0.3s ease-out;
   }
 
   .header.hidden {
     box-shadow: none;
-    transform: translate3d(0, -100%, 0);
+    transform: translate3d(-50%, -100%, 0);
   }
 
   .header .header-inner {
