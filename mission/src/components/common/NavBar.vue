@@ -47,6 +47,7 @@ export default {
 
     width: 100%;
     max-width: var(--max-size);
+    background: white;
     border-top: solid 1px rgb(192, 192, 192);
     box-sizing: border-box;
     box-shadow: 0px -4px 4px -4px rgb(141, 141, 141);
