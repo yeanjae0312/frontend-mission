@@ -28,36 +28,31 @@ export default {
         {
           id: 2,
           /* eslint-disable global-require */
-          img: require('@/assets/img/product-img.jpg'),
+          img: require('@/assets/img/company-img.jpg'),
           price: 39000,
-          original_price: 55000,
           name: '롱 코트2',
           description: '누빔이 있어 따뜻한 롱 코트입니다.',
         },
         {
           id: 3,
           /* eslint-disable global-require */
-          img: require('@/assets/img/product-img.jpg'),
-          price: 39000,
-          original_price: 55000,
+          img: require('@/assets/img/review-img01.png'),
+          price: 55000,
+          original_price: 110000,
           name: '롱 코트3',
           description: '누빔이 있어 따뜻하고 휘뚜루마뚜루 입기 좋은 롱 코트입니다.',
         },
         {
           id: 4,
           /* eslint-disable global-require */
-          img: require('@/assets/img/product-img.jpg'),
-          price: 39000,
-          original_price: 55000,
+          img: require('@/assets/img/review-img02.jpg'),
+          price: 78500,
           name: '롱 코트4',
           description: '누빔이 있어 따뜻한 롱 코트입니다.',
         },
         {
           id: 5,
-          /* eslint-disable global-require */
-          img: require('@/assets/img/product-img.jpg'),
-          price: 39000,
-          original_price: 55000,
+          price: 89000,
           name: '롱 코트5',
           description: '누빔이 있어 따뜻하고 휘뚜루마뚜루 입기 좋은 롱 코트입니다.',
         },
@@ -92,8 +87,8 @@ export default {
           id: 9,
           /* eslint-disable global-require */
           img: require('@/assets/img/product-img.jpg'),
-          price: 39000,
-          original_price: 55000,
+          price: 46700,
+          original_price: 88000,
           name: '롱 코트9',
           description: '누빔이 있어 따뜻하고 휘뚜루마뚜루 입기 좋은 롱 코트입니다.',
         },
@@ -101,8 +96,7 @@ export default {
           id: 10,
           /* eslint-disable global-require */
           img: require('@/assets/img/product-img.jpg'),
-          price: 39000,
-          original_price: 55000,
+          price: 44000,
           name: '롱 코트10',
           description: '누빔이 있어 따뜻한 롱 코트입니다.',
         },
