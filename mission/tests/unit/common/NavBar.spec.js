@@ -1,11 +1,21 @@
 import { mount } from '@vue/test-utils';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import NavBarPage from '@/components/common/NavBar.vue';
+
+library.add(fas, far);
 
 describe('NavBar', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(NavBarPage);
+    wrapper = mount(NavBarPage, {
+      global: {
+        stubs: { FontAwesomeIcon },
+      },
+    });
   });
 
   it('redners NavBar', () => {
