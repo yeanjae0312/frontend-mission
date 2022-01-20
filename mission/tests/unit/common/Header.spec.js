@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import HeaderPage from '@/components/common/Header.vue';
 
-describe('ItemListPage', () => {
+describe('Header', () => {
   let wrapper;
 
   beforeEach(() => {
