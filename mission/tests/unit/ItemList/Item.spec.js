@@ -1,10 +1,14 @@
 import { mount } from '@vue/test-utils';
-import ItemInfoPage from '@/components/ItemList/Item.vue';
+import ItemPage from '@/components/ItemList/Item.vue';
 
 describe('ItemListItem', () => {
-  it('redners ItemListItem', () => {
-    const wrapper = mount(ItemInfoPage);
+  let wrapper;
 
+  beforeEach(() => {
+    wrapper = mount(ItemPage);
+  });
+
+  it('redners ItemListItem', async () => {
     expect(wrapper.find('.item-list-item').exists()).toBe(true);
   });
 });
