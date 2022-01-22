@@ -1,7 +1,13 @@
 <template>
   <div id="item-list-page">
     <Header data-test="header"></Header>
-    <Item data-test="item" :propsdata="products"></Item>
+
+    <div class="item-list-wrap">
+      <div class="item-wrap flex-wrap">
+        <Item data-test="item" v-for="item in products" :key="item.id" :product="item"></Item>
+      </div>
+    </div>
+
     <NavBar data-test="navBar"></NavBar>
   </div>
 </template>
@@ -150,11 +156,24 @@ export default {
   },
   components: {
     Header,
-    NavBar,
     Item,
+    NavBar,
   },
 };
 </script>
 
 <style>
+  .item-list-wrap {
+    padding: calc(59px + 10px) var(--paddingSide) calc(57px + 10px);
+  }
+
+  .flex-wrap {
+    --gapSide: 14px;
+    --gapBottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    flex-wrap: wrap;
+    gap: var(--gapBottom) var(--gapSide);
+  }
 </style>
