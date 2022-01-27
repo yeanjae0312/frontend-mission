@@ -13,6 +13,7 @@ export default {
     return {
       isShowed: true,
       lastScrollPosition: 0,
+      debouncer: null,
     };
   },
   mounted() {
@@ -27,13 +28,16 @@ export default {
     onScroll() {
       const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (currentScrollPosition === 0) {
-        this.isShowed = true;
-      } else {
-        this.isShowed = false;
+      this.isShowed = currentScrollPosition === 0;
+
+      if (this.debouncer) {
+        clearTimeout(this.debouncer);
+        this.debouncer = null;
       }
 
-      this.lastScrollPosition = currentScrollPosition;
+      this.debouncer = setTimeout(() => {
+        this.lastScrollPosition = currentScrollPosition;
+      }, 200);
     },
   },
 };
