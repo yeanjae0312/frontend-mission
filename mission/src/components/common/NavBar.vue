@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <nav class="nav">
     <div class="nav-inner">
       <div class="nav-item">
         <a href="#none">
@@ -29,7 +29,7 @@
         </a>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>

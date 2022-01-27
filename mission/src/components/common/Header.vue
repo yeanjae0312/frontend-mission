@@ -1,9 +1,9 @@
 <template>
-  <div class="header" :class="{hidden: !isShowed}">
+  <header class="header" :class="{hidden: !isShowed}">
     <div class="header-inner">
       <p class="company-name"><a href="#none">YeonBlion Market</a></p>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
