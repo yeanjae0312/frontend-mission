@@ -4,7 +4,16 @@
 
     <main class="item-list-wrap">
       <div class="item-wrap flex-wrap">
-        <Item v-for="item in products" :key="item.id" :product="item"></Item>
+        <Item
+         v-for="item in products"
+         :id="item.id"
+         :img="item.img"
+         :price="item.price"
+         :original_price="item.original_price"
+         :name="item.name"
+         :description="item.description"
+         :key="item.id"
+        ></Item>
       </div>
     </main>
 
