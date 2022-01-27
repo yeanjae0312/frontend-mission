@@ -1,14 +1,14 @@
 <template>
   <div id="item-list-page">
-    <Header data-test="header"></Header>
+    <Header></Header>
 
     <main class="item-list-wrap">
       <div class="item-wrap flex-wrap">
-        <Item data-test="item" v-for="item in products" :key="item.id" :product="item"></Item>
+        <Item v-for="item in products" :key="item.id" :product="item"></Item>
       </div>
     </main>
 
-    <NavBar data-test="navBar"></NavBar>
+    <NavBar></NavBar>
   </div>
 </template>
 
