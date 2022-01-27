@@ -20,9 +20,7 @@ describe('ItemListItem', () => {
     const productImgUrl = '@/assets/img/product-img.jpg';
 
     await wrapper.setProps({
-      product: {
-        img: productImgUrl,
-      },
+      img: productImgUrl,
     });
 
     expect(wrapper.find('[data-test="product-img"]').find('img').attributes('src')).toContain(productImgUrl);
@@ -36,9 +34,7 @@ describe('ItemListItem', () => {
     const productPrice = 50000;
 
     await wrapper.setProps({
-      product: {
-        price: productPrice,
-      },
+      price: productPrice,
     });
 
     expect(wrapper.find('[data-test="product-price"]').text()).toContain('50,000');
@@ -48,9 +44,7 @@ describe('ItemListItem', () => {
     const productOriginalPrice = 30000;
 
     await wrapper.setProps({
-      product: {
-        original_price: productOriginalPrice,
-      },
+      original_price: productOriginalPrice,
     });
 
     expect(wrapper.find('[data-test="product-original-price"]').exists()).toBe(true);
@@ -62,10 +56,8 @@ describe('ItemListItem', () => {
     const productOriginalPrice = 100000;
 
     await wrapper.setProps({
-      product: {
-        price: productPrice,
-        original_price: productOriginalPrice,
-      },
+      price: productPrice,
+      original_price: productOriginalPrice,
     });
 
     expect(wrapper.find('[data-test="product-rate"]').text()).toContain('50');
@@ -75,9 +67,7 @@ describe('ItemListItem', () => {
     const productName = '사자귀마개';
 
     await wrapper.setProps({
-      product: {
-        name: productName,
-      },
+      name: productName,
     });
 
     expect(wrapper.find('[data-test="product-name"]').text()).toContain(productName);
@@ -87,9 +77,7 @@ describe('ItemListItem', () => {
     const productDesc = '사자는 동물의 왕입니다.';
 
     await wrapper.setProps({
-      product: {
-        description: productDesc,
-      },
+      description: productDesc,
     });
 
     expect(wrapper.find('[data-test="product-desc"]').text()).toContain(productDesc);
