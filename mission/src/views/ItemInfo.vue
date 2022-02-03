@@ -23,9 +23,9 @@
       <div data-test="product-info" class="product-info">
         <p class="info-name">{{ item.name }}</p>
         <div class="info-price">
-          <p class="info-price-rate" v-if="isDiscounted">{{ showDiscountRate }}%</p>
+          <p class="info-price-rate" v-if="this.item.original_price">{{ showDiscountRate }}%</p>
           <p data-test="discount-num" class="info-price-discount">{{ priceWidthComma(item.price) }}원</p>
-          <p class="info-price-original line" v-if="isDiscounted">{{ priceWidthComma(item.original_price) }}원</p>
+          <p class="info-price-original line" v-if="this.item.original_price">{{ priceWidthComma(item.original_price) }}원</p>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
         <font-awesome-icon data-test="heart-solid" :icon="['far','heart']" class="icon-heart" />
       </div>
 
-      <button data-test="btn-purchase" type="button"><span v-if="isDiscounted">{{ priceWidthComma(item.price) }}</span><span v-else>{{ priceWidthComma(item.original_price) }}</span>원 구매</button>
+      <button data-test="btn-purchase" type="button"><span v-if="this.item.original_price">{{ priceWidthComma(item.price) }}</span><span v-else>{{ priceWidthComma(item.original_price) }}</span>원 구매</button>
     </div>
   </div>
 </template>
@@ -102,9 +102,6 @@ export default {
     },
   },
   computed: {
-    isDiscounted() {
-      return this.item.original_price !== -1;
-    },
     showDiscountRate() {
       const rate = ((this.item.original_price - this.item.price) / this.item.original_price) * 100;
 
