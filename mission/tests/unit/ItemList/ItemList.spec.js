@@ -29,7 +29,17 @@ describe('ItemListPage', () => {
     expect(wrapper.findComponent(HeaderPage).exists()).toBe(true);
   });
 
-  it('아이템 컴포넌트가 있는가', () => {
+  it('아이템 컴포넌트가 있는가', async () => {
+    const dataItemList = [
+      {
+        product_no: '1', image: 'img', price: 10000, original_price: 55000, name: 'name', description: 'desc',
+      },
+    ];
+
+    await wrapper.setData({
+      items: dataItemList,
+    });
+
     expect(wrapper.findComponent(ItemPage).exists()).toBe(true);
   });
 
@@ -40,15 +50,15 @@ describe('ItemListPage', () => {
   it('아이템 컴포넌트가 존재하는 만큼 렌더링 되는가', async () => {
     const dataItemList = [
       {
-        id: 1, img: 'img', price: 10000, original_price: 55000, name: 'name', description: 'desc',
+        product_no: '1', image: 'img', price: 10000, original_price: 55000, name: 'name', description: 'desc',
       },
       {
-        id: 2, img: 'img', price: 10000, original_price: 55000, name: 'name', description: 'desc',
+        product_no: '2', image: 'img', price: 10000, original_price: 55000, name: 'name', description: 'desc',
       },
     ];
 
     await wrapper.setData({
-      products: dataItemList,
+      items: dataItemList,
     });
 
     const itemWrapper = wrapper.findAllComponents(ItemPage);
