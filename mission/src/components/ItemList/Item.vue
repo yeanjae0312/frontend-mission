@@ -1,6 +1,6 @@
 <template>
   <div class="item-list-item">
-    <a href="#none">
+    <router-link :to="`/item/${id}`">
       <p data-test="product-img" class="img">
         <img v-if="img" :src="img" alt="">
         <span v-else>이미지가 없습니다.</span>
@@ -14,7 +14,8 @@
 
       <p data-test="product-name" class="item-name">{{ name }}</p>
       <p data-test="product-desc" class="item-desc">{{ description }}</p>
-    </a>
+    </router-link>
+    <router-view :id="id"></router-view>
   </div>
 </template>
 
@@ -22,7 +23,7 @@
 export default {
   name: 'ItemListItem',
   props: {
-    id: { type: Number, default: 0 },
+    id: { type: String, default: '' },
     img: { type: String, default: '' },
     price: { type: Number, default: 0 },
     original_price: { type: Number, default: -1 },
