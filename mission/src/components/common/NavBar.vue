@@ -2,10 +2,10 @@
   <nav class="nav">
     <div class="nav-inner">
       <div class="nav-item">
-        <a href="#none">
+        <router-link to="/">
           <font-awesome-icon data-test="nav-icon-home" :icon="['fas','home']" class="item-icon" />
           <p data-test="nav-text-home" class="item-conts">홈</p>
-        </a>
+        </router-link>
       </div>
 
       <div class="nav-item">
