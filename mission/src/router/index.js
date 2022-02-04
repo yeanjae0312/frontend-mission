@@ -18,6 +18,7 @@ const routes = [
   },
   {
     path: '/item/:id',
+    name: 'ItemInfo',
     component: ItemInfoPage,
     props: true,
   },

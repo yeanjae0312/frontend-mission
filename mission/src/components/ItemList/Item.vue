@@ -1,6 +1,6 @@
 <template>
   <div class="item-list-item">
-    <div data-test="router-btn-link" @click="moveItemInfo()">
+    <router-link data-test="router-btn-link" :to="`/item/${id}`">
       <p data-test="product-img" class="img">
         <img v-if="img" :src="img" alt="">
         <span v-else>이미지가 없습니다.</span>
@@ -14,7 +14,8 @@
 
       <p data-test="product-name" class="item-name">{{ name }}</p>
       <p data-test="product-desc" class="item-desc">{{ description }}</p>
-    </div>
+    </router-link>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -32,9 +33,6 @@ export default {
   methods: {
     priceWidthComma(value) {
       return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
-    moveItemInfo() {
-      this.$router.push(`/item/${this.id}`);
     },
   },
   computed: {
