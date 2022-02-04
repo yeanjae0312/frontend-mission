@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .item-list-wrap {
     padding: calc(59px + 10px) var(--paddingSide) calc(57px + 10px);
   }

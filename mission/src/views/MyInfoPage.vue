@@ -3,9 +3,9 @@
     <Header></Header>
 
     <main class="item-list-wrap">
-      <p>id: {{info.id }} </p>
-      <p>email: {{ info.email }}</p>
-      <p>username: {{ info.username }} </p>
+      <p><b>id:</b> {{info.id }} </p>
+      <p><b>email:</b> {{ info.email }}</p>
+      <p><b>username:</b> {{ info.username }} </p>
     </main>
 
     <NavBar></NavBar>
@@ -42,9 +42,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .item-list-wrap {
     padding: calc(59px + 10px) var(--paddingSide) calc(57px + 10px);
+  }
+
+  .item-list-wrap p {
+    margin-top: 10px;
   }
 
   .flex-wrap {
