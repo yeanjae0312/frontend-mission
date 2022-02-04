@@ -9,24 +9,24 @@
       </div>
 
       <div class="nav-item">
-        <a href="#none">
+        <router-link to="/wish">
           <font-awesome-icon data-test="nav-icon-heart" :icon="['fas','heart']" class="item-icon" />
           <p data-test="nav-text-heart" class="item-conts">찜</p>
-        </a>
+        </router-link>
       </div>
 
       <div class="nav-item">
-        <a href="#none">
+        <router-link to="/cart">
           <font-awesome-icon data-test="nav-icon-cart" :icon="['fas','shopping-cart']" class="item-icon" />
           <p data-test="nav-text-cart" class="item-conts">장바구니</p>
-        </a>
+        </router-link>
       </div>
 
       <div class="nav-item">
-        <a href="#none">
+        <router-link to="/info">
           <font-awesome-icon data-test="nav-icon-my" :icon="['fas','user']" class="item-icon" />
           <p data-test="nav-text-my" class="item-conts">My</p>
-        </a>
+        </router-link>
       </div>
     </div>
   </nav>
