@@ -3,37 +3,43 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { createRouter, createWebHistory } from 'vue-router';
 import ItemPage from '@/components/ItemList/Item.vue';
+import ItemInfoPage from '@/views/ItemInfo.vue';
 
 library.add(fas, far);
 
 describe('ItemListItem', () => {
   let wrapper;
 
-  const mockRouter = {
-    push: jest.fn(),
-  };
+  const routes = [
+    {
+      path: '/item',
+      component: ItemInfoPage,
+      props: true,
+    },
+  ];
+
+  const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
+  });
 
   beforeEach(() => {
     wrapper = mount(ItemPage, {
       global: {
+        plugins: [router],
         stubs: { FontAwesomeIcon },
-        mocks: {
-          $router: mockRouter,
-        },
       },
     });
   });
 
   it('routing test', async () => {
-    await wrapper.setProps({
-      id: '1',
-    });
+    router.push('/item');
 
-    await wrapper.find('[data-test="router-btn-link"]').trigger('click');
+    await router.isReady();
 
-    expect(mockRouter.push).toHaveBeenCalledTimes(1);
-    expect(mockRouter.push).toHaveBeenCalledWith('/item/1');
+    expect(wrapper.findComponent(ItemInfoPage).exists()).toBe(true);
   });
 
   it('redners ItemListItem', async () => {
