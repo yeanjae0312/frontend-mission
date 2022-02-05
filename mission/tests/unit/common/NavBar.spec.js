@@ -44,18 +44,21 @@ describe('NavBar', () => {
     routes,
   });
 
-  it('home routing test', async () => {
-    router.push('/');
+  let wrapperApp;
 
-    await router.isReady();
-
-    const wrapperApp = mount(App, {
+  beforeEach(() => {
+    wrapperApp = mount(App, {
       global: {
         plugins: [router],
         stubs: { FontAwesomeIcon },
       },
     });
+  });
 
+  it('home routing test', async () => {
+    router.push('/');
+
+    await router.isReady();
     await wrapperApp.find('[data-test="router-link-home"]').trigger('click');
     await flushPromises();
 
@@ -66,14 +69,6 @@ describe('NavBar', () => {
     router.push('/');
 
     await router.isReady();
-
-    const wrapperApp = mount(App, {
-      global: {
-        plugins: [router],
-        stubs: { FontAwesomeIcon },
-      },
-    });
-
     await wrapperApp.find('[data-test="router-link-wish"]').trigger('click');
     await flushPromises();
 
@@ -84,14 +79,6 @@ describe('NavBar', () => {
     router.push('/');
 
     await router.isReady();
-
-    const wrapperApp = mount(App, {
-      global: {
-        plugins: [router],
-        stubs: { FontAwesomeIcon },
-      },
-    });
-
     await wrapperApp.find('[data-test="router-link-cart"]').trigger('click');
     await flushPromises();
 
@@ -102,14 +89,6 @@ describe('NavBar', () => {
     router.push('/');
 
     await router.isReady();
-
-    const wrapperApp = mount(App, {
-      global: {
-        plugins: [router],
-        stubs: { FontAwesomeIcon },
-      },
-    });
-
     await wrapperApp.find('[data-test="router-link-my"]').trigger('click');
     await flushPromises();
 
