@@ -1,6 +1,6 @@
 <template>
   <div class="item-list-item">
-    <router-link data-test="router-btn-link" :to="`/item/${id}`">
+    <router-link data-test="router-link-itemInfo" :to="`/item/${id}`">
       <p data-test="product-img" class="img">
         <img v-if="img" :src="img" alt="">
         <span v-else>이미지가 없습니다.</span>
@@ -15,7 +15,6 @@
       <p data-test="product-name" class="item-name">{{ name }}</p>
       <p data-test="product-desc" class="item-desc">{{ description }}</p>
     </router-link>
-    <router-view></router-view>
   </div>
 </template>
 
