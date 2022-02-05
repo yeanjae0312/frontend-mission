@@ -2,28 +2,28 @@
   <nav class="nav">
     <div class="nav-inner">
       <div class="nav-item">
-        <router-link to="/">
+        <router-link data-test="router-link-home" to="/">
           <font-awesome-icon data-test="nav-icon-home" :icon="['fas','home']" class="item-icon" />
           <p data-test="nav-text-home" class="item-conts">홈</p>
         </router-link>
       </div>
 
       <div class="nav-item">
-        <router-link to="/wish">
+        <router-link data-test="router-link-wish" to="/wish">
           <font-awesome-icon data-test="nav-icon-heart" :icon="['fas','heart']" class="item-icon" />
           <p data-test="nav-text-heart" class="item-conts">찜</p>
         </router-link>
       </div>
 
       <div class="nav-item">
-        <router-link to="/cart">
+        <router-link data-test="router-link-cart" to="/cart">
           <font-awesome-icon data-test="nav-icon-cart" :icon="['fas','shopping-cart']" class="item-icon" />
           <p data-test="nav-text-cart" class="item-conts">장바구니</p>
         </router-link>
       </div>
 
       <div class="nav-item">
-        <router-link to="/info">
+        <router-link data-test="router-link-my" to="/info">
           <font-awesome-icon data-test="nav-icon-my" :icon="['fas','user']" class="item-icon" />
           <p data-test="nav-text-my" class="item-conts">My</p>
         </router-link>
