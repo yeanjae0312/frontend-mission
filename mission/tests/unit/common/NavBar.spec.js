@@ -119,11 +119,11 @@ describe('NavBar', () => {
   });
 
   it('nav의 찜 아이콘 영역이 존재하는가', () => {
-    expect(wrapper.get('[data-test="nav-icon-heart"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="nav-icon-wish"]').exists()).toBe(true);
   });
 
   it('nav의 찜 텍스트 영역이 존재하는가', () => {
-    expect(wrapper.get('[data-test="nav-text-heart"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="nav-text-wish"]').exists()).toBe(true);
   });
 
   it('nav의 장바구니 아이콘 영역이 존재하는가', () => {
