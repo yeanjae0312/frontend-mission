@@ -40,7 +40,7 @@ describe('ItemListPage', () => {
     expect(wrapper.find('#item-list-page').exists()).toBe(true);
   });
 
-  it('item API가 호출되는가', async () => {
+  it('item List API가 호출되는가', async () => {
     await flushPromises();
 
     expect(itemApi.get).toHaveBeenCalled();
