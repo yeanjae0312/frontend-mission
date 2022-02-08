@@ -1,13 +1,48 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ItemInfoPage from '@/views/ItemInfo.vue';
+import itemApi from '@/repositories/ItemRepository';
 
 library.add(fas, far);
 
 describe('ItemInfoPage', () => {
+  const dataItem = {
+    product_no: '1',
+    name: 'name',
+    image: 'img',
+    price: 50000,
+    original_price: 100000,
+    description: 'desc',
+    seller: {
+      seller_no: 1,
+      name: 'seller-name',
+      hash_tags: [
+        'tags1',
+        'tags2',
+      ],
+      profile_image: 'profile-img',
+    },
+    reviews: [
+      {
+        review_no: 1,
+        writer: 'writer',
+        title: 'title',
+        content: 'content',
+        likes_count: 7,
+        created: '2021. 12. 04',
+        img: 'reviews-img',
+      },
+    ],
+  };
+  const res = {
+    data: { item: dataItem },
+  };
+
+  itemApi.getItem = jest.fn().mockResolvedValue(res);
+
   let wrapper;
 
   beforeEach(() => {
@@ -20,6 +55,12 @@ describe('ItemInfoPage', () => {
 
   it('redners ItemInfoPage', () => {
     expect(wrapper.find('.item-info-page').exists()).toBe(true);
+  });
+
+  it('item API가 호출되는가', async () => {
+    await flushPromises();
+
+    expect(itemApi.getItem).toHaveBeenCalled();
   });
 
   it('상품 이미지 영역이 있는가', () => {
@@ -68,10 +109,7 @@ describe('ItemInfoPage', () => {
 
   it('판매가와 원가를 입력시 할인율이 잘 도출되는가', async () => {
     await wrapper.setData({
-      item: {
-        price: 50000,
-        original_price: 100000,
-      },
+      item: dataItem,
     });
 
     expect(wrapper.get('[data-test="discount-num"]').text()).toContain('50');
