@@ -4,7 +4,7 @@
 
     <main class="item-list-wrap">
       <div class="item-wrap flex-wrap">
-        <Item
+        <Item data-test="item"
          v-for="item in items"
          :id="item.product_no"
          :img="item.image"
