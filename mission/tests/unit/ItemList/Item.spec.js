@@ -1,11 +1,62 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { createRouter, createWebHistory } from 'vue-router';
+import App from '@/App.vue';
+import ItemListPage from '@/views/ItemList.vue';
 import ItemPage from '@/components/ItemList/Item.vue';
+import ItemInfoPage from '@/views/ItemInfo.vue';
+
+library.add(fas, far);
 
 describe('ItemListItem', () => {
   let wrapper;
 
+  const routes = [
+    {
+      path: '/',
+      component: ItemListPage,
+    },
+    {
+      path: '/item',
+      component: ItemInfoPage,
+      props: true,
+    },
+  ];
+
+  const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
+  });
+
   beforeEach(() => {
-    wrapper = mount(ItemPage);
+    wrapper = mount(ItemPage, {
+      global: {
+        plugins: [router],
+        stubs: { FontAwesomeIcon },
+      },
+    });
+  });
+
+  it('ItemInfo routing test', async () => {
+    router.push('/'); // 첫 마운트 됐을 때 로딩될 위치 설정
+
+    await router.isReady();
+
+    const wrapperApp = mount(App, {
+      global: {
+        plugins: [router],
+        stubs: { FontAwesomeIcon },
+      },
+    });
+
+    await wrapper.find('[data-test="router-link-itemInfo"]').trigger('click');
+
+    await flushPromises(); // created 안의 (가상의) API 호출이 되고 DOM Update가 되기까지를 기다림
+
+    expect(wrapperApp.findComponent(ItemInfoPage).exists()).toBe(true);
   });
 
   it('redners ItemListItem', async () => {

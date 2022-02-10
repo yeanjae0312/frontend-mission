@@ -1,32 +1,11 @@
 <template>
   <nav class="nav">
     <div class="nav-inner">
-      <div class="nav-item">
-        <a href="#none">
-          <font-awesome-icon data-test="nav-icon-home" :icon="['fas','home']" class="item-icon" />
-          <p data-test="nav-text-home" class="item-conts">홈</p>
-        </a>
-      </div>
-
-      <div class="nav-item">
-        <a href="#none">
-          <font-awesome-icon data-test="nav-icon-heart" :icon="['fas','heart']" class="item-icon" />
-          <p data-test="nav-text-heart" class="item-conts">찜</p>
-        </a>
-      </div>
-
-      <div class="nav-item">
-        <a href="#none">
-          <font-awesome-icon data-test="nav-icon-cart" :icon="['fas','shopping-cart']" class="item-icon" />
-          <p data-test="nav-text-cart" class="item-conts">장바구니</p>
-        </a>
-      </div>
-
-      <div class="nav-item">
-        <a href="#none">
-          <font-awesome-icon data-test="nav-icon-my" :icon="['fas','user']" class="item-icon" />
-          <p data-test="nav-text-my" class="item-conts">My</p>
-        </a>
+      <div class="nav-item" v-for="item in menu" :key="item">
+        <router-link :data-test="`router-link-${item.titleEn}`" :to="item.path">
+          <font-awesome-icon :data-test="`nav-icon-${item.titleEn}`" :icon="item.icon" class="item-icon" />
+          <p :data-test="`nav-text-${item.titleEn}`" class="item-conts">{{ item.title }}</p>
+        </router-link>
       </div>
     </div>
   </nav>
@@ -34,7 +13,36 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      menu: [
+        {
+          title: '홈',
+          titleEn: 'home',
+          path: '/',
+          icon: ['fas', 'home'],
+        },
+        {
+          title: '찜',
+          titleEn: 'wish',
+          path: '/wish',
+          icon: ['fas', 'heart'],
+        },
+        {
+          title: '장바구니',
+          titleEn: 'cart',
+          path: '/cart',
+          icon: ['fas', 'shopping-cart'],
+        },
+        {
+          title: 'My',
+          titleEn: 'my',
+          path: '/info',
+          icon: ['fas', 'user'],
+        },
+      ],
+    };
+  },
 };
 </script>
 

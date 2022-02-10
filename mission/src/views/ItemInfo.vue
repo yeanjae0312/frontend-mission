@@ -1,59 +1,59 @@
 <template>
-  <div id='item-info-page'>
+  <div class='item-info-page'>
     <div data-test="product-img" class="product-img">
-      <img :src="product.img" alt="">
+      <img :src="item.image" alt="">
     </div>
 
     <div class="company-wrap">
       <div data-test="company-profile" class="img">
-        <img :src="company.profile" alt="">
+        <img :src="item.seller.profile_image" alt="">
       </div>
 
       <div data-test="company-info" class="info">
-        <p data-test="company-info-name" class="info-name">{{ company.name }}</p>
-        <p class="info-tag"><span data-test="company-info-tag" v-for="item in company.tag" :key="item">#{{ item }}</span></p>
+        <p data-test="company-info-name" class="info-name">{{ item.seller.name }}</p>
+        <p class="info-tag"><span data-test="company-info-tag" v-for="item in item.seller.hash_tags" :key="item">#{{ item }}</span></p>
       </div>
 
       <div data-test="company-star" class="star">
-        <font-awesome-icon data-test="company-star-fill" v-if="company.star" @click="toggleClickedStar()" :icon="['fas','star']" class="icon-star" />
-        <font-awesome-icon data-test="company-star-solid" v-else @click="toggleClickedStar()" :icon="['far','star']" class="icon-star" />
+        <font-awesome-icon data-test="company-star-solid" :icon="['far','star']" class="icon-star" />
       </div>
     </div>
 
     <div class="product-wrap">
       <div data-test="product-info" class="product-info">
-        <p class="info-name">{{ product.name }}</p>
+        <p class="info-name">{{ item.name }}</p>
         <div class="info-price">
-          <p class="info-price-rate" v-if="product.isDiscount">{{ product.discountRate }}%</p>
-          <p data-test="discount-num" class="info-price-discount" v-if="product.isDiscount">{{ showDiscountPrice }}원</p>
-          <p class="info-price-original" :class="{line: product.isDiscount}">{{ product.price }}원</p>
+          <p class="info-price-rate" v-if="this.item.original_price">{{ showDiscountRate }}%</p>
+          <p data-test="discount-num" class="info-price-discount">{{ priceWidthComma(item.price) }}원</p>
+          <p class="info-price-original line" v-if="this.item.original_price">{{ priceWidthComma(item.original_price) }}원</p>
         </div>
       </div>
 
       <div data-test="product-detail" class="product-detail">
         <p class="detail-title">상품 상세 설명</p>
-        <div v-html="product.detail"></div>
+        <div class="detail-content" v-html="item.description"></div>
       </div>
     </div>
 
     <div class="review-wrap">
       <p class="review-title">Review</p>
 
-      <div data-test="review" class="review-list" v-for="list in reviewer" :key="list">
+      <div data-test="review" class="review-list" v-for="list in item.reviews" :key="list">
         <div class="review-list-inner">
 
           <div class="info-box">
             <div class="info-box-top">
-              <p data-test="reviewer-name" class="name">{{ list.name }}</p>
-              <p data-test="reviewer-date" class="date">{{ list.date }}</p>
+              <p data-test="reviewer-name" class="name">{{ list.writer }}</p>
+              <p data-test="reviewer-date" class="date">{{ list.created }}</p>
+              <p data-test="reviewer-date" class="date">Like: {{ list.likes_count }}</p>
             </div>
             <p data-test="reviewer-title" class="info-box-title">{{ list.title }}</p>
-            <p data-test="reviewer-cont" class="info-box-cont">{{ list.contentString }}</p>
+            <p data-test="reviewer-cont" class="info-box-cont">{{ list.content }}</p>
           </div>
 
           <div class="img-box">
             <p class="img">
-              <img :src="list.contentImg" alt="">
+              <img :src="list.img" alt="">
             </p>
           </div>
 
@@ -63,82 +63,56 @@
 
     <div class="btn-wrap">
       <div>
-        <font-awesome-icon data-test="heart-fill" v-if="product.heart" @click="toggleClickedHeart()" :icon="['fas','heart']" class="icon-heart" />
-        <font-awesome-icon data-test="heart-solid" v-else @click="toggleClickedHeart()" :icon="['far','heart']" class="icon-heart" />
+        <font-awesome-icon data-test="heart-solid" :icon="['far','heart']" class="icon-heart" />
       </div>
 
-      <button data-test="btn-purchase" type="button"><span v-if="product.isDiscount">{{ showDiscountPrice }}</span><span v-else>{{ product.price }}</span>원 구매</button>
+      <button data-test="btn-purchase" type="button"><span v-if="this.item.original_price">{{ priceWidthComma(item.price) }}</span><span v-else>{{ priceWidthComma(item.original_price) }}</span>원 구매</button>
     </div>
   </div>
 </template>
 
 <script>
+import RepositoryFactory from '@/repositories/RepositoryFactory';
+
+const ItemRepository = RepositoryFactory.get('items');
+
 export default {
   name: 'ItemInfoPage',
+  props: {
+    id: { type: String, default: '' },
+  },
   data() {
     return {
-      company: {
-        name: '멋쟁이사자처럼',
-        /* eslint-disable global-require */
-        profile: require('../assets/img/company-img.jpg'),
-        tag: ['시크', '심플베이직', '페미닌', '러블리'],
-        star: false,
+      item: {
+        seller: {},
+        reviews: [{}],
       },
-      product: {
-        name: '[누빔안감] 핸드메이드 울 롱코트',
-        /* eslint-disable global-require */
-        img: require('../assets/img/product-img.jpg'),
-        heart: false,
-        isDiscount: true,
-        discountRate: '39',
-        price: 98000,
-        detail: '<div style="width:100%; padding:10px 14px; box-sizing: border-box;"><img src="/img/product-detail01.jpg" style="width:100%;"><span style="font-size:14px; font-weight:600;">누빔이 있어 따뜻하고 그렇다고 무겁지 않은 코트입니다!</span></div>',
-      },
-      reviewer: [
-        {
-          name: 'lion',
-          date: '2021. 01. 14',
-          title: '만족해요',
-          contentString: '핏이 이쁘고 따뜻해서 만족해요. 요즘 교복처럼 입고다니는 옷이네요~',
-          /* eslint-disable global-require */
-          contentImg: require('../assets/img/review-img01.png'),
-        },
-        {
-          name: 'cuty lion',
-          date: '2021. 01. 10',
-          title: '별로에요',
-          contentString: '생각보다 두껍고 무게가 나가네요. 보풀도 잘 일어날 것 같은 재질이에요.',
-          /* eslint-disable global-require */
-          contentImg: require('../assets/img/review-img02.jpg'),
-        },
-      ],
     };
   },
+  created() {
+    this.getItem();
+  },
   methods: {
-    toggleClickedStar() {
-      this.company.star = !this.company.star;
+    async getItem() {
+      const { data } = await ItemRepository.getItem(this.id);
+      this.item = data.item;
     },
-    toggleClickedHeart() {
-      this.product.heart = !this.product.heart;
-
-      if (this.product.heart === true) {
-        // eslint-disable-next-line no-alert
-        alert('찜에 등록되었습니다.');
-      }
+    priceWidthComma(value) {
+      return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
   },
   computed: {
-    showDiscountPrice() {
-      const num = this.product.price * (1 - this.product.discountRate * 0.01); // 할인가
+    showDiscountRate() {
+      const rate = ((this.item.original_price - this.item.price) / this.item.original_price) * 100;
 
-      return Math.ceil((num / 100)) * 100; // 100원 단위에서 올림처리
+      return Number.prototype.toFixed.call(rate, 0);
     },
   },
 };
 </script>
 
 <style scoped>
-  #item-info-page {
+  .item-info-page {
     --max-size: 400px;
     --paddingSide: 14px;
     width:100%;
@@ -277,6 +251,10 @@ export default {
     padding:10px var(--paddingSide);
     border-bottom: solid 1px rgb(231, 231, 231);
     font-weight:600;
+  }
+
+  .product-detail .detail-content {
+    padding: 10px var(--paddingSide);
   }
 
   .review-wrap {
