@@ -41,7 +41,7 @@ describe('ItemListItem', () => {
   });
 
   it('ItemInfo routing test', async () => {
-    router.push('/');
+    router.push('/'); // 첫 마운트 됐을 때 로딩될 위치 설정
 
     await router.isReady();
 
@@ -54,7 +54,7 @@ describe('ItemListItem', () => {
 
     await wrapper.find('[data-test="router-link-itemInfo"]').trigger('click');
 
-    await flushPromises();
+    await flushPromises(); // created 안의 (가상의) API 호출이 되고 DOM Update가 되기까지를 기다림
 
     expect(wrapperApp.findComponent(ItemInfoPage).exists()).toBe(true);
   });

@@ -41,7 +41,7 @@ describe('ItemListPage', () => {
   });
 
   it('item List API가 호출되는가', async () => {
-    await flushPromises();
+    await flushPromises(); // created 안의 (가상의) API 호출이 되고 DOM Update가 되기까지를 기다림
 
     expect(itemApi.get).toHaveBeenCalled();
   });
@@ -58,10 +58,6 @@ describe('ItemListPage', () => {
   });
 
   it('아이템 컴포넌트가 있는가', async () => {
-    await wrapper.setData({
-      items: dataItemList,
-    });
-
     expect(wrapper.findComponent(ItemPage).exists()).toBe(true);
   });
 
@@ -70,10 +66,6 @@ describe('ItemListPage', () => {
   });
 
   it('아이템 컴포넌트가 존재하는 만큼 렌더링 되는가', async () => {
-    await wrapper.setData({
-      items: dataItemList,
-    });
-
     const itemWrapper = wrapper.findAllComponents(ItemPage);
 
     expect(itemWrapper).toHaveLength(dataItemList.length);
