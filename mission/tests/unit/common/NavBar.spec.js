@@ -4,6 +4,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { createRouter, createWebHistory } from 'vue-router';
+import { createStore } from 'vuex';
 import App from '@/App.vue';
 import NavBarPage from '@/components/common/NavBar.vue';
 import ItemListPage from '@/views/ItemList.vue';
@@ -44,12 +45,25 @@ describe('NavBar', () => {
     routes,
   });
 
+  const store = createStore({
+    state: {
+      products: [
+        {},
+      ],
+    },
+    getters: {
+      storedCartItems(state) {
+        return state.products;
+      },
+    },
+  });
+
   let wrapperApp;
 
   beforeEach(() => {
     wrapperApp = mount(App, {
       global: {
-        plugins: [router],
+        plugins: [router, store],
         stubs: { FontAwesomeIcon },
       },
     });
@@ -100,7 +114,7 @@ describe('NavBar', () => {
   beforeEach(() => {
     wrapper = mount(NavBarPage, {
       global: {
-        plugins: [router],
+        plugins: [router, store],
         stubs: { FontAwesomeIcon },
       },
     });
