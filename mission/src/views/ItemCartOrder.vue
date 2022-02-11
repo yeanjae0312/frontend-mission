@@ -3,9 +3,9 @@
     <p class="cart-title">주문/결제</p>
 
     <section class="item-info-wrap">
-      <p class="cart-common-title">주문상품 총 <span>1</span>개</p>
-      <ul class="item-info-list">
-        <li>핏이 좋은 수트</li>
+      <p class="cart-common-title">주문상품 총 <span data-test="cart-order-count">{{ getTotalItem }}</span>개</p>
+      <ul class="item-info-list" v-for="item in storedCartItems" :key="item">
+        <li data-test="cart-order-item">{{ item.name }}</li>
       </ul>
     </section>
 
@@ -31,6 +31,11 @@
       </div>
 
       <div class="order-info-item">
+        <p class="cart-common-title">주문 총 가격</p>
+        <p data-test="cart-order-price" class="cart-common-red-title">{{ priceWithComma(getTotalPrice) }}원</p>
+      </div>
+
+      <div class="order-info-item">
         <p class="cart-common-title">결제 방법</p>
         <div class="box-list">
           <p>간편결제</p>
@@ -48,14 +53,24 @@
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+export default {
+  computed: {
+    ...mapGetters(['storedCartItems', 'getTotalItem', 'getTotalPrice']),
+  },
+  methods: {
+    priceWithComma(value) {
+      return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
 };
 </script>
 
 <style scoped>
 .item-cart-order-page {
   padding: 0 var(--paddingSide);
+  box-sizing: border-box;
 }
 
 .cart-title {
@@ -73,6 +88,11 @@ export default {
 .cart-common-title {
   margin-bottom: 6px;
   font-size: 15px;
+  font-weight: bold;
+}
+
+.cart-common-red-title {
+  color: #fe3152;
   font-weight: bold;
 }
 
@@ -95,7 +115,7 @@ export default {
 }
 
 .order-info-wrap .order-info-item {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .order-info-wrap .order-info-item input {
@@ -107,14 +127,16 @@ export default {
 .order-info-wrap .order-info-item .box-list {
   --gap: 10px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: var(--gap);
 }
 
 .order-info-wrap .order-info-item .box-list p {
-  width: calc(25% - var(--gap)/2);
+  min-width: calc(25% - calc(calc(var(--gap)*3)/4));
   padding: 10px;
+  box-sizing: border-box;
   border: solid 1px #ccc;
   border-radius: 6px;
   font-size: 12px;

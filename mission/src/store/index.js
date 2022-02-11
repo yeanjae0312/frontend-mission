@@ -1,12 +1,8 @@
 import { createStore } from 'vuex';
+import ItemCart from '@/store/modules/ItemCart';
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    ItemCart,
   },
 });
