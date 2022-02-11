@@ -17,6 +17,10 @@
       </div>
     </main>
 
+    <div class="order-btn-wrap">
+      <router-link data-test="router-link-order" :to="`/order`"><p class="order-btn">구매하기</p></router-link>
+    </div>
+
     <NavBar></NavBar>
   </div>
 </template>
@@ -66,5 +70,19 @@ export default {
     align-items: top;
     flex-wrap: wrap;
     gap: var(--gapBottom) var(--gapSide);
+  }
+
+  .order-btn-wrap {
+    padding: 0 var(--paddingSide) calc(57px + 20px);
+    text-align: center;
+  }
+
+  .order-btn-wrap .order-btn {
+    padding: 12px;
+    background: #fe3152;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
   }
 </style>
