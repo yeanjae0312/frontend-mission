@@ -52,7 +52,7 @@ describe('NavBar', () => {
       ],
     },
     getters: {
-      storedCartItems(state) {
+      getCartItemList(state) {
         return state.products;
       },
     },

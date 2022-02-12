@@ -1,53 +1,57 @@
-import { mount, flushPromises } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { createStore } from 'vuex';
 import ItemInfoPage from '@/views/ItemInfo.vue';
-import itemApi from '@/repositories/ItemRepository';
 
 library.add(fas, far);
 
 describe('ItemInfoPage', () => {
-  const dataItem = {
-    product_no: '1',
-    name: 'name',
-    image: 'img',
-    price: 50000,
-    original_price: 100000,
-    description: 'desc',
-    seller: {
-      seller_no: 1,
-      name: 'seller-name',
-      hash_tags: [
-        'tags1',
-        'tags2',
+  const store = createStore({
+    state: {
+      products: [
+        {
+          product_no: '1',
+          image: 'product-img',
+          price: 39000,
+          original_price: 55000,
+          name: 'product-name',
+          description: 'product-desc',
+          detail_description: 'product-detail-desc',
+          seller: {
+            name: 'seller-name',
+            profile_image: 'seller-profile-img',
+            hash_tags: ['tag1', 'tag2'],
+          },
+          reviews: [
+            {
+              writer: 'writer',
+              created: '2021. 02. 12',
+              title: 'title',
+              likes_count: 7,
+              content: 'content',
+              img: 'reviews-img',
+            },
+          ],
+        },
       ],
-      profile_image: 'profile-img',
+      cart: [],
     },
-    reviews: [
-      {
-        review_no: 1,
-        writer: 'writer',
-        title: 'title',
-        content: 'content',
-        likes_count: 7,
-        created: '2021. 12. 04',
-        img: 'reviews-img',
+    getters: {
+      getItemList(state) {
+        return state.products;
       },
-    ],
-  };
-  const res = {
-    data: { item: dataItem },
-  };
-
-  itemApi.getItem = jest.fn().mockResolvedValue(res);
+    },
+  });
 
   let wrapper;
 
   beforeEach(() => {
     wrapper = mount(ItemInfoPage, {
       global: {
+        plugins: [store],
         stubs: { FontAwesomeIcon },
       },
     });
@@ -55,12 +59,6 @@ describe('ItemInfoPage', () => {
 
   it('redners ItemInfoPage', () => {
     expect(wrapper.find('.item-info-page').exists()).toBe(true);
-  });
-
-  it('item API가 호출되는가', async () => {
-    await flushPromises(); // created 안의 (가상의) API 호출이 되고 DOM Update가 되기까지를 기다림
-
-    expect(itemApi.getItem).toHaveBeenCalled();
   });
 
   it('상품 이미지 영역이 있는가', () => {
@@ -80,7 +78,7 @@ describe('ItemInfoPage', () => {
   });
 
   it('상호명에 데이터 값이 잘 들어갔는가', async () => {
-    expect(wrapper.get('[data-test="company-info-name"]').text()).toBe('seller-name');
+    expect(wrapper.get('[data-test="company-info-name"]').text()).toContain('seller-name');
   });
 
   it('태그 리스트에 데이터 값이 잘 들어갔는가', async () => {
@@ -124,6 +122,6 @@ describe('ItemInfoPage', () => {
   });
 
   it('구매 버튼 안에 가격의 데이터가 잘 가져와 지는가', async () => {
-    expect(wrapper.get('[data-test="btn-purchase"]').text()).toContain('50,000');
+    expect(wrapper.get('[data-test="btn-purchase"]').text()).toContain('39,000');
   });
 });

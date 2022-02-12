@@ -54,13 +54,13 @@ describe('NavBar', () => {
       ],
     },
     getters: {
-      storedCartItems(state) {
+      getCartItemList(state) {
         return state.products;
       },
-      getTotalItem(state) {
+      getTotalCartItem(state) {
         return state.products.length;
       },
-      getTotalPrice(state) {
+      getTotalOrderPrice(state) {
         let sum = 0;
 
         for (let i = 0; i < state.products.length; i += 1) {

@@ -32,10 +32,10 @@ describe('CartList', () => {
 
   const store = createStore({
     state: {
-      products: [
+      products: [{}],
+      cart: [
         {
           product_no: '1',
-          /* eslint-disable global-require */
           image: 'img',
           price: 39000,
           original_price: 55000,
@@ -45,17 +45,17 @@ describe('CartList', () => {
       ],
     },
     getters: {
-      storedCartItems(state) {
-        return state.products;
+      getCartItemList(state) {
+        return state.cart;
       },
-      getTotalItem(state) {
-        return state.products.length;
+      getTotalCartItem(state) {
+        return state.cart.length;
       },
-      getTotalPrice(state) {
+      getTotalOrderPrice(state) {
         let sum = 0;
 
-        for (let i = 0; i < state.products.length; i += 1) {
-          sum += state.products[i].price;
+        for (let i = 0; i < state.cart.length; i += 1) {
+          sum += state.cart[i].price;
         }
 
         return sum;
