@@ -5,7 +5,7 @@
     <main class="item-list-wrap">
       <div class="item-wrap flex-wrap">
         <Item data-test="item"
-         v-for="item in items"
+         v-for="item in getItemList"
          :id="item.product_no"
          :img="item.image"
          :price="item.price"
@@ -22,28 +22,15 @@
 </template>
 
 <script>
-import RepositoryFactory from '@/repositories/RepositoryFactory';
+import { mapGetters } from 'vuex';
 import Header from '../components/common/Header.vue';
 import NavBar from '../components/common/NavBar.vue';
 import Item from '../components/ItemList/Item.vue';
 
-const ItemRepository = RepositoryFactory.get('items');
-
 export default {
   name: 'ItemListPage',
-  data() {
-    return {
-      items: [],
-    };
-  },
-  created() {
-    this.getItems();
-  },
-  methods: {
-    async getItems() {
-      const { data } = await ItemRepository.get();
-      this.items = data.items;
-    },
+  computed: {
+    ...mapGetters(['getItemList']),
   },
   components: {
     Header,

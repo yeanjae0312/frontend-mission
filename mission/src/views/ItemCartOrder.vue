@@ -3,8 +3,8 @@
     <p class="cart-title">주문/결제</p>
 
     <section class="item-info-wrap">
-      <p class="cart-common-title">주문상품 총 <span data-test="cart-order-count">{{ getTotalItem }}</span>개</p>
-      <ul class="item-info-list" v-for="item in storedCartItems" :key="item">
+      <p class="cart-common-title">주문상품 총 <span data-test="cart-order-count">{{ getTotalCartItem }}</span>개</p>
+      <ul class="item-info-list" v-for="item in getCartItemList" :key="item">
         <li data-test="cart-order-item">{{ item.name }}</li>
       </ul>
     </section>
@@ -32,7 +32,7 @@
 
       <div class="order-info-item">
         <p class="cart-common-title">주문 총 가격</p>
-        <p data-test="cart-order-price" class="cart-common-red-title">{{ priceWithComma(getTotalPrice) }}원</p>
+        <p data-test="cart-order-price" class="cart-common-red-title">{{ priceWithComma(getTotalOrderPrice) }}원</p>
       </div>
 
       <div class="order-info-item">
@@ -57,7 +57,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['storedCartItems', 'getTotalItem', 'getTotalPrice']),
+    ...mapGetters(['getCartItemList', 'getTotalCartItem', 'getTotalOrderPrice']),
   },
   methods: {
     priceWithComma(value) {

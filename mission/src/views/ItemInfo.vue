@@ -1,17 +1,17 @@
 <template>
   <div class='item-info-page'>
     <div data-test="product-img" class="product-img">
-      <img :src="item.image" alt="">
+      <img :src="getItemList[`${id-1}`]?.image" alt="">
     </div>
 
     <div class="company-wrap">
       <div data-test="company-profile" class="img">
-        <img :src="item.seller.profile_image" alt="">
+        <img :src="getItemList[`${id-1}`]?.seller.profile_image" alt="">
       </div>
 
       <div data-test="company-info" class="info">
-        <p data-test="company-info-name" class="info-name">{{ item.seller.name }}</p>
-        <p class="info-tag"><span data-test="company-info-tag" v-for="item in item.seller.hash_tags" :key="item">#{{ item }}</span></p>
+        <p data-test="company-info-name" class="info-name">{{ getItemList[`${id-1}`]?.seller.name }}</p>
+        <p class="info-tag"><span data-test="company-info-tag" v-for="item in getItemList[`${id-1}`]?.seller.hash_tags" :key="item">#{{ item }}</span></p>
       </div>
 
       <div data-test="company-star" class="star">
@@ -21,24 +21,24 @@
 
     <div class="product-wrap">
       <div data-test="product-info" class="product-info">
-        <p class="info-name">{{ item.name }}</p>
+        <p class="info-name">{{ getItemList[`${id-1}`]?.name }}</p>
         <div class="info-price">
-          <p class="info-price-rate" v-if="this.item.original_price">{{ showDiscountRate }}%</p>
-          <p data-test="discount-num" class="info-price-discount">{{ priceWidthComma(item.price) }}원</p>
-          <p class="info-price-original line" v-if="this.item.original_price">{{ priceWidthComma(item.original_price) }}원</p>
+          <p class="info-price-rate" v-if="this.getItemList[`${id-1}`]?.original_price">{{ showDiscountRate }}%</p>
+          <p data-test="discount-num" class="info-price-discount">{{ priceWidthComma(getItemList[`${id-1}`]?.price) }}원</p>
+          <p class="info-price-original line" v-if="this.getItemList[`${id-1}`]?.original_price">{{ priceWidthComma(getItemList[`${id-1}`]?.original_price) }}원</p>
         </div>
       </div>
 
       <div data-test="product-detail" class="product-detail">
         <p class="detail-title">상품 상세 설명</p>
-        <div class="detail-content" v-html="item.description"></div>
+        <div class="detail-content" v-html="getItemList[`${id-1}`]?.detail_description"></div>
       </div>
     </div>
 
     <div class="review-wrap">
       <p class="review-title">Review</p>
 
-      <div data-test="review" class="review-list" v-for="list in item.reviews" :key="list">
+      <div data-test="review" class="review-list" v-for="list in getItemList[`${id-1}`]?.reviews" :key="list">
         <div class="review-list-inner">
 
           <div class="info-box">
@@ -66,44 +66,31 @@
         <font-awesome-icon data-test="heart-solid" :icon="['far','heart']" class="icon-heart" />
       </div>
 
-      <button data-test="btn-purchase" type="button"><span v-if="this.item.original_price">{{ priceWidthComma(item.price) }}</span><span v-else>{{ priceWidthComma(item.original_price) }}</span>원 구매</button>
+      <button data-test="btn-purchase" type="button" @click="clickOrderBtn(this.id - 1)"><span>{{ priceWidthComma(getItemList[`${id-1}`]?.price) }}</span>원 구매</button>
     </div>
   </div>
 </template>
 
 <script>
-import RepositoryFactory from '@/repositories/RepositoryFactory';
-
-const ItemRepository = RepositoryFactory.get('items');
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'ItemInfoPage',
   props: {
     id: { type: String, default: '' },
   },
-  data() {
-    return {
-      item: {
-        seller: {},
-        reviews: [{}],
-      },
-    };
-  },
-  created() {
-    this.getItem();
-  },
   methods: {
-    async getItem() {
-      const { data } = await ItemRepository.getItem(this.id);
-      this.item = data.item;
-    },
+    ...mapActions({
+      clickOrderBtn: 'clickItemInfoCartBtn',
+    }),
     priceWidthComma(value) {
       return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
   },
   computed: {
+    ...mapGetters(['getItemList']),
     showDiscountRate() {
-      const rate = ((this.item.original_price - this.item.price) / this.item.original_price) * 100;
+      const rate = ((this.getItemList[this.id - 1].original_price - this.getItemList[this.id - 1].price) / this.getItemList[this.id - 1].original_price) * 100;
 
       return Number.prototype.toFixed.call(rate, 0);
     },

@@ -5,7 +5,7 @@
     <main class="item-list-wrap">
       <div class="item-wrap flex-wrap">
         <Item
-         v-for="item in storedCartItems"
+         v-for="item in getCartItemList"
          :id="item.product_no"
          :img="item.image"
          :price="item.price"
@@ -34,7 +34,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'ItemWishListPage',
   computed: {
-    ...mapGetters(['storedCartItems']),
+    ...mapGetters(['getCartItemList']),
   },
   components: {
     Header,

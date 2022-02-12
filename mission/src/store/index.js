@@ -1,8 +1,8 @@
 import { createStore } from 'vuex';
-import ItemCart from '@/store/modules/ItemCart';
+import ItemList from '@/store/modules/ItemList';
 
 export default createStore({
   modules: {
-    ItemCart,
+    ItemList,
   },
 });
