@@ -66,7 +66,7 @@
         <font-awesome-icon data-test="heart-solid" :icon="['far','heart']" class="icon-heart" />
       </div>
 
-      <button data-test="btn-purchase" type="button" @click="clickOrderBtn(this.id - 1)"><span>{{ priceWidthComma(getItemList[`${id-1}`]?.price) }}</span>원 구매</button>
+      <button data-test="btn-purchase" type="button" @click="clickOrderBtn(id)"><span>{{ priceWidthComma(getItemList[`${id-1}`]?.price) }}</span>원 구매</button>
     </div>
   </div>
 </template>

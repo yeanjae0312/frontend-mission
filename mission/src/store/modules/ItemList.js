@@ -212,7 +212,12 @@ const mutations = {
   addCartItem(state, id) {
     // eslint-disable-next-line no-alert
     alert('해당 상품을 장바구니에 담았습니다.');
-    state.cart.push(state.products[id]);
+
+    for (let i = 0; i < state.products.length; i += 1) {
+      if (state.products[i].product_no === id) {
+        state.cart.push(state.products[i]);
+      }
+    }
   },
 };
 
