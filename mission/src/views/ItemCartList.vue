@@ -4,8 +4,8 @@
 
     <main class="item-list-wrap">
       <div class="item-wrap flex-wrap">
-        <Item
-         v-for="item in getCartItemList"
+        <Item data-test="cart-item"
+         v-for="item in items"
          :id="item.product_no"
          :img="item.image"
          :price="item.price"
@@ -26,15 +26,28 @@
 </template>
 
 <script>
+import RepositoryFactory from '@/repositories/RepositoryFactory';
 import Header from '@/components/common/Header.vue';
 import NavBar from '@/components/common/NavBar.vue';
 import Item from '@/components/ItemList/Item.vue';
-import { mapGetters } from 'vuex';
+
+const ItemRepository = RepositoryFactory.get('cartItems');
 
 export default {
   name: 'ItemWishListPage',
-  computed: {
-    ...mapGetters(['getCartItemList']),
+  data() {
+    return {
+      items: [],
+    };
+  },
+  created() {
+    this.getItems();
+  },
+  methods: {
+    async getItems() {
+      const { data } = await ItemRepository.get();
+      this.items = data.cart_item;
+    },
   },
   components: {
     Header,
