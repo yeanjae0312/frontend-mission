@@ -4,7 +4,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { createRouter, createWebHistory } from 'vue-router';
-import { createStore } from 'vuex';
 import App from '@/App.vue';
 import ItemListPage from '@/views/ItemList.vue';
 import ItemPage from '@/components/ItemList/Item.vue';
@@ -30,33 +29,12 @@ describe('ItemListItem', () => {
     routes,
   });
 
-  const store = createStore({
-    state: {
-      products: [
-        {
-          product_no: '1',
-          /* eslint-disable global-require */
-          image: 'img',
-          price: 39000,
-          original_price: 55000,
-          name: '핏이 좋은 수트',
-          description: 'desc',
-        },
-      ],
-    },
-    getters: {
-      getItemList(state) {
-        return state.products;
-      },
-    },
-  });
-
   let wrapper;
 
   beforeEach(() => {
     wrapper = mount(ItemPage, {
       global: {
-        plugins: [router, store],
+        plugins: [router],
         stubs: { FontAwesomeIcon },
       },
     });
@@ -69,7 +47,7 @@ describe('ItemListItem', () => {
 
     const wrapperApp = mount(App, {
       global: {
-        plugins: [router, store],
+        plugins: [router],
         stubs: { FontAwesomeIcon },
       },
     });
