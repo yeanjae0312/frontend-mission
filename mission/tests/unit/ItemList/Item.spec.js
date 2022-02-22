@@ -12,8 +12,6 @@ import ItemInfoPage from '@/views/ItemInfo.vue';
 library.add(fas, far);
 
 describe('ItemListItem', () => {
-  let wrapper;
-
   const routes = [
     {
       path: '/',
@@ -30,6 +28,8 @@ describe('ItemListItem', () => {
     history: createWebHistory(process.env.BASE_URL),
     routes,
   });
+
+  let wrapper;
 
   beforeEach(() => {
     wrapper = mount(ItemPage, {

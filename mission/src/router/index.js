@@ -4,6 +4,8 @@ import ItemInfoPage from '@/views/ItemInfo.vue';
 import ItemWishListPage from '@/views/ItemWishList.vue';
 import ItemCartListPage from '@/views/ItemCartList.vue';
 import MyInfoPage from '@/views/MyInfoPage.vue';
+import ItemCartOrder from '@/views/ItemCartOrder.vue';
+import ItemCartOrderComplete from '@/views/ItemCartOrderComplete.vue';
 
 const routes = [
   {
@@ -42,6 +44,16 @@ const routes = [
     name: 'MyInfo',
     component: MyInfoPage,
     props: true,
+  },
+  {
+    path: '/order',
+    name: 'ItemCartOrder',
+    component: ItemCartOrder,
+  },
+  {
+    path: '/order/complete',
+    name: 'ItemCartOrderComplete',
+    component: ItemCartOrderComplete,
   },
 ];
 

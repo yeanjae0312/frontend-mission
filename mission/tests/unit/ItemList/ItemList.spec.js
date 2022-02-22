@@ -3,7 +3,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import ItemInfoPage from '@/views/ItemList.vue';
+import ItemListPage from '@/views/ItemList.vue';
 import HeaderPage from '@/components/common/Header.vue';
 import ItemPage from '@/components/ItemList/Item.vue';
 import NavBarPage from '@/components/common/NavBar.vue';
@@ -29,7 +29,7 @@ describe('ItemListPage', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(ItemInfoPage, {
+    wrapper = shallowMount(ItemListPage, {
       global: {
         stubs: { FontAwesomeIcon },
       },
