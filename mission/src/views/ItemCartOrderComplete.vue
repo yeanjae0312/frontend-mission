@@ -3,7 +3,7 @@
     <div class="complete-wrap">
       <font-awesome-icon :icon="['fas','check']" />
       <p class="complete-text">주문이 완료되었습니다!</p>
-      <router-link data-test="router-link-home" :to="`/`"><p class="back-btn">홈으로 돌아가기</p></router-link>
+      <router-link data-test="router-link-home" to="/"><p class="back-btn">홈으로 돌아가기</p></router-link>
     </div>
   </div>
 </template>

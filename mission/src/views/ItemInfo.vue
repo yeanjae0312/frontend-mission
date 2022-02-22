@@ -66,12 +66,13 @@
         <font-awesome-icon data-test="heart-solid" :icon="['far','heart']" class="icon-heart" />
       </div>
 
-      <button data-test="btn-purchase" type="button"><span v-if="this.item.original_price">{{ priceWidthComma(item.price) }}</span><span v-else>{{ priceWidthComma(item.original_price) }}</span>원 구매</button>
+      <button data-test="btn-purchase" type="button" @click="clickCartBtn()"><span v-if="this.item.original_price">{{ priceWidthComma(item.price) }}</span><span v-else>{{ priceWidthComma(item.original_price) }}</span>원 구매</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import RepositoryFactory from '@/repositories/RepositoryFactory';
 
 const ItemRepository = RepositoryFactory.get('items');
@@ -93,9 +94,13 @@ export default {
     this.getItem();
   },
   methods: {
+    ...mapActions(['clickItemInfoCartBtn']),
     async getItem() {
       const { data } = await ItemRepository.getItem(this.id);
       this.item = data.item;
+    },
+    async clickCartBtn() {
+      this.clickItemInfoCartBtn(this.item);
     },
     priceWidthComma(value) {
       return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');

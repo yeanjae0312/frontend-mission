@@ -47,7 +47,7 @@
     </section>
 
     <section class="order-btn-wrap">
-      <router-link data-test="router-link-complete" :to="`/order/complete`"><p class="order-btn">결제하기</p></router-link>
+      <router-link data-test="router-link-complete" to="/order/complete"><p class="order-btn">결제하기</p></router-link>
     </section>
   </div>
 </template>
