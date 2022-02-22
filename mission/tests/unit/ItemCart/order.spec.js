@@ -32,10 +32,9 @@ describe('NavBar', () => {
 
   const store = createStore({
     state: {
-      products: [
+      cart_items: [
         {
           product_no: '1',
-          /* eslint-disable global-require */
           image: 'img',
           price: 30000,
           original_price: 55000,
@@ -44,7 +43,6 @@ describe('NavBar', () => {
         },
         {
           product_no: '2',
-          /* eslint-disable global-require */
           image: 'img',
           price: 50000,
           original_price: 55000,
@@ -55,19 +53,13 @@ describe('NavBar', () => {
     },
     getters: {
       getCartItemList(state) {
-        return state.products;
+        return state.cart_items;
       },
       getTotalCartItem(state) {
-        return state.products.length;
+        return state.cart_items.length;
       },
       getTotalOrderPrice(state) {
-        let sum = 0;
-
-        for (let i = 0; i < state.products.length; i += 1) {
-          sum += state.products[i].price;
-        }
-
-        return sum;
+        return state.cart_items.reduce((acc, cur) => acc + cur.price, 0);
       },
     },
   });
@@ -83,7 +75,7 @@ describe('NavBar', () => {
     });
   });
 
-  it('routing test', async () => {
+  it('routes to complete page when home button clicked', async () => {
     router.push('/');
 
     await router.isReady();

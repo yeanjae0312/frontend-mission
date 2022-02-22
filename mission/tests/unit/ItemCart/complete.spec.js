@@ -26,7 +26,7 @@ describe('NavBar', () => {
 
   const store = createStore({
     state: {
-      products: [
+      cart_items: [
         {
           product_no: '1',
           image: 'img',
@@ -38,8 +38,8 @@ describe('NavBar', () => {
       ],
     },
     getters: {
-      getItemList(state) {
-        return state.products;
+      getCartItemList(state) {
+        return state.cart_items;
       },
     },
   });
@@ -55,7 +55,7 @@ describe('NavBar', () => {
     });
   });
 
-  it('routing test', async () => {
+  it('routes to main page when home button clicked', async () => {
     router.push('/');
 
     await router.isReady();
