@@ -3,18 +3,9 @@
     <Header></Header>
 
     <main class="item-list-wrap">
-      <div class="item-wrap flex-wrap">
-        <Item data-test="item"
-         v-for="item in items"
-         :id="item.product_no"
-         :img="item.image"
-         :price="item.price"
-         :original_price="item.original_price"
-         :name="item.name"
-         :description="item.description"
-         :key="item.product_no"
-        ></Item>
-      </div>
+      <p><b>id:</b> {{info.id }} </p>
+      <p><b>email:</b> {{ info.email }}</p>
+      <p><b>username:</b> {{ info.username }} </p>
     </main>
 
     <NavBar></NavBar>
@@ -23,17 +14,16 @@
 
 <script>
 import RepositoryFactory from '@/repositories/RepositoryFactory';
-import Header from '../components/common/Header.vue';
-import NavBar from '../components/common/NavBar.vue';
-import Item from '../components/ItemList/Item.vue';
+import Header from '@/components/common/Header.vue';
+import NavBar from '@/components/common/NavBar.vue';
 
-const ItemRepository = RepositoryFactory.get('items');
+const ItemRepository = RepositoryFactory.get('myInfo');
 
 export default {
-  name: 'ItemListPage',
+  name: 'ItemWishListPage',
   data() {
     return {
-      items: [],
+      info: [],
     };
   },
   created() {
@@ -42,20 +32,23 @@ export default {
   methods: {
     async getItems() {
       const { data } = await ItemRepository.get();
-      this.items = data.items;
+      this.info = data;
     },
   },
   components: {
     Header,
-    Item,
     NavBar,
   },
 };
 </script>
 
-<style>
+<style scoped>
   .item-list-wrap {
     padding: calc(59px + 10px) var(--paddingSide) calc(57px + 10px);
+  }
+
+  .item-list-wrap p {
+    margin-top: 10px;
   }
 
   .flex-wrap {

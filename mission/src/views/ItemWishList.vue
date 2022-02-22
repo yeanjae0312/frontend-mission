@@ -4,7 +4,7 @@
 
     <main class="item-list-wrap">
       <div class="item-wrap flex-wrap">
-        <Item data-test="item"
+        <Item
          v-for="item in items"
          :id="item.product_no"
          :img="item.image"
@@ -23,14 +23,14 @@
 
 <script>
 import RepositoryFactory from '@/repositories/RepositoryFactory';
-import Header from '../components/common/Header.vue';
-import NavBar from '../components/common/NavBar.vue';
-import Item from '../components/ItemList/Item.vue';
+import Header from '@/components/common/Header.vue';
+import NavBar from '@/components/common/NavBar.vue';
+import Item from '@/components/ItemList/Item.vue';
 
-const ItemRepository = RepositoryFactory.get('items');
+const ItemRepository = RepositoryFactory.get('wishItems');
 
 export default {
-  name: 'ItemListPage',
+  name: 'ItemWishListPage',
   data() {
     return {
       items: [],
@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .item-list-wrap {
     padding: calc(59px + 10px) var(--paddingSide) calc(57px + 10px);
   }

@@ -1,12 +1,8 @@
 import { createStore } from 'vuex';
+import ItemList from '@/store/modules/ItemList';
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    ItemList,
   },
 });
